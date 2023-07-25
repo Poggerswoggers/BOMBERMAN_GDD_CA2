@@ -15,7 +15,7 @@ public class BombTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InstantiateBomb();
     }
 
     // Update is called once per frame
@@ -49,7 +49,6 @@ public class BombTest : MonoBehaviour
     void InstantiateBomb()
     {
         GameObject bombProjectile = Instantiate(Bomb, firePoint.position, Quaternion.identity); 
-
     }
 
 }

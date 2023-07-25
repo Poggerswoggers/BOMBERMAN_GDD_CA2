@@ -1,30 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraControl : MonoBehaviour
 {
-    public float sensX;
-    public float sensY;
+    public float sensX, sensY;
 
-    public Transform playerOrientation;
-    public Transform playerObj;
-
-    float xRot;
-    float YRot;
+    public Transform follow, Target;
+    float mouseX, mouseY;
 
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("AimCamera")]
+    [SerializeField] private CinemachineVirtualCamera aimCamera;
+
+    private void Update()
     {
+        mouseX  += Input.GetAxisRaw("Mouse X") * sensX;
+        mouseY  -= Input.GetAxisRaw("Mouse Y") * sensY;
+
+        mouseY = Mathf.Clamp(mouseY, -35, 60);
+
+        follow.rotation = Quaternion.Euler(0, mouseX, 0);
+        Target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 viewDr = playerObj.position - new Vector3(transform.position.x, playerObj.position.y, transform.position.z);
-        playerOrientation.forward = viewDr.normalized;
 
+    public void AdsMode(bool aimstate)
+    {
+        if (aimstate)
+        {
+            aimCamera.gameObject.SetActive(true);
+        }
+        else
+        {
+            aimCamera.gameObject.SetActive(false);
+        }
     }
+
+
 }

@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform cam;
+    public CameraControl cameraControlRef;
     public int moveSpeed = 15;
-    public float sensX;
+
 
     CharacterController cc;
+
+    public bool holdingBomb;
+    public Transform firePoint;
+    public GameObject Bomb;
 
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        StartCoroutine(InstantiateBomb());
     }
 
     // Update is called once per frame
@@ -22,16 +27,46 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (dir.magnitude >= 0.1f)
         {
-            //float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            //transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-
-            //Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             Vector3 displacement = transform.TransformDirection(dir.normalized);
             cc.Move(displacement * moveSpeed * Time.deltaTime);
-
-            transform.Rotate(0, Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime, 0);
-
         }
 
+        if (Input.GetMouseButton(1))
+        {
+            cameraControlRef.AdsMode(true);
+        }
+        else
+        {
+            cameraControlRef.AdsMode(false);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            ThrowBomb();
+        }
+        
+    }
+
+    void ThrowBomb()
+    {
+        if (holdingBomb)
+        {
+            Debug.Log("Throw Bomb");
+            firePoint.GetChild(0).GetComponent<BombProjectile>().fireBomb();
+            holdingBomb = false;
+        }
+        StartCoroutine(InstantiateBomb());
+    }
+
+    IEnumerator InstantiateBomb()
+    {
+        if (!holdingBomb)
+        {
+            holdingBomb = true;
+            Debug.Log("Begin Bomb Animation");
+            yield return new WaitForSeconds(0.5f);
+            GameObject _bomb = Instantiate(Bomb, firePoint.position, Quaternion.identity);
+            _bomb.transform.SetParent(firePoint);
+        }
     }
 }
