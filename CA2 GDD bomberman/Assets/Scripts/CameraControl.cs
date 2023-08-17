@@ -14,6 +14,15 @@ public class CameraControl : MonoBehaviour
     [Header("AimCamera")]
     [SerializeField] private CinemachineVirtualCamera aimCamera;
 
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+
+
     private void Update()
     {
         mouseX  += Input.GetAxisRaw("Mouse X") * sensX;

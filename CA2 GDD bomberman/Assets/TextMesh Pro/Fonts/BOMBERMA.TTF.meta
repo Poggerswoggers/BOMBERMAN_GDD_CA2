@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a0ef67b6673dbe84b903d23db0ffa23a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Bomberman
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ca18bc1185da8c64ca8df9e31f1faa33, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
