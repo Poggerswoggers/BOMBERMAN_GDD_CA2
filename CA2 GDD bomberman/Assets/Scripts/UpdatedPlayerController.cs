@@ -72,33 +72,12 @@ public class UpdatedPlayerController : MonoBehaviour
         GameObject bomb = Instantiate(bombPrefab, firePoint.position, transform.rotation);
         Rigidbody rb = bomb.GetComponent<Rigidbody>();
 
-        Debug.Log(tpsAimCam.AimTargetReticle);
-        Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+        //quaternion.lookRot(aimDir);
 
-        // Cast a ray from the camera through the center of the screen
-        Ray ray = cam.ScreenPointToRay(screenCenter);
+        Vector3 aimDirection = (debugTransform.position - firePoint.position).normalized;
+        rb.AddForce(aimDirection * throwForce, ForceMode.VelocityChange);
 
-        // Perform the raycast
-        Debug.Log(ray.direction);
-
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
-            Debug.Log(hit);
-            // Handle the raycast hit, e.g., interact with the hit object
-        }
-
-
-        rb.AddForce(firePoint.forward * throwForce, ForceMode.VelocityChange);
-
-        CalculateAimAt();
+        Debug.Log(aimDirection);
 
     }
-
-    public void CalculateAimAt()
-    {
-
-    }
-
 }
