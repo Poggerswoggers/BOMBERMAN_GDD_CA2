@@ -28,7 +28,7 @@ public class CameraControl : MonoBehaviour
         mouseX  += Input.GetAxisRaw("Mouse X") * sensX;
         mouseY  -= Input.GetAxisRaw("Mouse Y") * sensY;
 
-        mouseY = Mathf.Clamp(mouseY, -35, 60);
+        mouseY = Mathf.Clamp(mouseY, -45, 80);
 
         follow.rotation = Quaternion.Euler(0, mouseX, 0);
         Target.rotation = Quaternion.Euler(mouseY, mouseX, 0);

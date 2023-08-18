@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
     CharacterController cc;
     public CameraControl cameraControlRef;
 
+    public enum players { P1 , P2}
+    public players currentPlayer;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +34,9 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundcheckPos.position, radius, whatIsGround);
 
-        Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal" + currentPlayer.ToString()), 0, Input.GetAxisRaw("Vertical" + currentPlayer.ToString()));
+
+
         if (dir.magnitude >= 0.1f)
         {
             Vector3 displacement = transform.TransformDirection(dir.normalized);

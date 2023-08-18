@@ -21,19 +21,20 @@ public class UpdatedPlayerController : MonoBehaviour
 
     public Transform firePoint;
 
+    PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        pc = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = cam.ScreenPointToRay(screenCenterPoint);
+        Vector3 viewportCenter = new Vector3(0.5f, 0.5f, cam.nearClipPlane);
+        Ray ray = cam.ViewportPointToRay(viewportCenter);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, tpsAimCam.AimCollisionFilter))
         {
             debugTransform.position = raycastHit.point;
@@ -41,13 +42,13 @@ public class UpdatedPlayerController : MonoBehaviour
 
 
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetButton("Fire1"))
         {
             if (throwForce >= maxThrowForce) return;
             throwForce += throwWindUpRate * Time.deltaTime;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetButtonUp("Fire1"))
         {
             if (!onCooldown)
             {

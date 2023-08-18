@@ -10,24 +10,26 @@ public class BombThrow : MonoBehaviour
 
 
     float explosionCountdown;
-    bool startCD;
+    public bool startCD;
     bool hasExploded = false;
 
     public GameObject explosionEffect; //particle for explosion
 
     Rigidbody rigidBody;
 
+
     // Start is called before the first frame update
     void Start()
     {
         explosionCountdown = explosionDelay;
         rigidBody = GetComponent<Rigidbody>();
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (startCD)
         {
             explosionCountdown -= Time.deltaTime;

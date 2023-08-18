@@ -97,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.55
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3522797051404748979
 MonoBehaviour:
@@ -114,6 +114,7 @@ MonoBehaviour:
   explosionDelay: 3
   blastRadius: 3
   knockbackForce: 2
+  startCD: 0
   explosionEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
 --- !u!54 &3522797051404748980
 Rigidbody:
