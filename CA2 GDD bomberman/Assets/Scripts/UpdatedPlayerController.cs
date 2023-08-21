@@ -19,6 +19,8 @@ public class UpdatedPlayerController : MonoBehaviour
 
     [Header("IceWall")]
     private bool isUsingWall = false;
+    public float iceWallCD = 14f;
+    public float currentIceWallCD = 0f;
     public KeyCode wallCastKeybind, directionKeybind;
     public float wallRange;
     public GameObject iceWallPreview, iceWallObject;
@@ -80,7 +82,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
         if (casting) CastingIceWall();
 
-        if (Input.GetKeyDown(wallCastKeybind))
+        if (Input.GetKeyDown(wallCastKeybind) && currentIceWallCD <- 0)
         {
             casting = !casting; //casting = false;
             if (!casting) iceWallPreview.SetActive(false);
@@ -88,6 +90,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
            
         }
+        else currentIceWallCD -= Time.deltaTime;
         
 
     }
@@ -129,6 +132,7 @@ public class UpdatedPlayerController : MonoBehaviour
                 casting = false;
                 isUsingWall = false;
                 iceWallPreview.SetActive(false);
+                currentIceWallCD = iceWallCD;
             }
 
         }
