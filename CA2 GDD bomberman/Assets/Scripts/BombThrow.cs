@@ -76,7 +76,10 @@ public class BombThrow : MonoBehaviour
             {
                 //apply damage
             }
-
+            if (nearbyObjects.GetComponent<IceWall>())
+            {
+                nearbyObjects.GetComponent<IceWall>().health=0;
+            }
            
         }
 

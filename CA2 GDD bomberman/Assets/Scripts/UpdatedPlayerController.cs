@@ -17,6 +17,16 @@ public class UpdatedPlayerController : MonoBehaviour
     float currentThrowCooldown;
     bool onCooldown = false;
 
+    [Header("IceWall")]
+    private bool isUsingWall = false;
+    public KeyCode wallCastKeybind, directionKeybind;
+    public float wallRange;
+    public GameObject iceWallPreview, iceWallObject;
+    public LayerMask layermask;
+    private bool direction, casting;
+
+
+
     [SerializeField] private Transform debugTransform;
 
     public Transform firePoint;
@@ -42,13 +52,13 @@ public class UpdatedPlayerController : MonoBehaviour
 
 
 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && !isUsingWall)
         {
             if (throwForce >= maxThrowForce) return;
             throwForce += throwWindUpRate * Time.deltaTime;
         }
 
-        if (Input.GetButtonUp("Fire1"))
+        if (Input.GetButtonUp("Fire1") && !isUsingWall)
         {
             if (!onCooldown)
             {
@@ -66,6 +76,20 @@ public class UpdatedPlayerController : MonoBehaviour
             currentThrowCooldown -= Time.deltaTime;
         }
         else onCooldown = false;
+
+
+        if (casting) CastingIceWall();
+
+        if (Input.GetKeyDown(wallCastKeybind))
+        {
+            casting = !casting; //casting = false;
+            if (!casting) iceWallPreview.SetActive(false);
+            isUsingWall = true;
+
+           
+        }
+        
+
     }
 
     void ThrowBomb()
@@ -79,6 +103,42 @@ public class UpdatedPlayerController : MonoBehaviour
         rb.AddForce(aimDirection * throwForce, ForceMode.VelocityChange);
 
         Debug.Log(aimDirection);
+
+    }
+
+    void CastingIceWall()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, wallRange, layermask))
+        {
+            if (!iceWallPreview.activeSelf)
+            {
+                iceWallPreview.SetActive(true);
+            }
+
+            Quaternion rotation = Quaternion.Euler(0, 0, 0);
+            if (direction) rotation.y = 1; //direction is toggle
+            else rotation.y = 0;
+
+            iceWallPreview.transform.localRotation = rotation;
+            iceWallPreview.transform.position = hit.point;
+
+            if (Input.GetButtonUp("Fire1"))
+            {
+                Instantiate(iceWallObject, hit.point, iceWallPreview.transform.rotation);
+                casting = false;
+                isUsingWall = false;
+                iceWallPreview.SetActive(false);
+            }
+
+        }
+        else { iceWallPreview.SetActive(false); }
+
+
+        if (Input.GetKeyDown(directionKeybind))
+        {
+            direction = !direction;
+        }
 
     }
 }
