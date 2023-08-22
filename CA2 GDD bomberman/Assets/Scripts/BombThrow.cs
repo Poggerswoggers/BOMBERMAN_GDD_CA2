@@ -81,9 +81,8 @@ public class BombThrow : MonoBehaviour
         }
 
         //removes bomb after exploded
-       
         Destroy(gameObject);
+        
 
     }
-
 }

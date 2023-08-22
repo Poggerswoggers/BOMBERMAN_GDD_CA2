@@ -14,6 +14,7 @@ public class UpdatedPlayerController : MonoBehaviour
     public float throwWindUpRate = 10f;
     public float maxThrowForce = 40f;
     public float throwCooldown = 2.5f;
+    public float upwardsThrowForce = 2f;
     float currentThrowCooldown;
     bool onCooldown = false;
 
@@ -76,7 +77,8 @@ public class UpdatedPlayerController : MonoBehaviour
         //quaternion.lookRot(aimDir);
 
         Vector3 aimDirection = (debugTransform.position - firePoint.position).normalized;
-        rb.AddForce(aimDirection * throwForce, ForceMode.VelocityChange);
+        Vector3 forceToAdd = aimDirection * throwForce + transform.up * upwardsThrowForce;
+        rb.AddForce(forceToAdd, ForceMode.VelocityChange);
 
         Debug.Log(aimDirection);
 
