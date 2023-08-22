@@ -6,6 +6,8 @@ TagManager:
   tags:
   - ground
   - Bomb
+  - Player1
+  - Player2
   layers:
   - Default
   - TransparentFX
@@ -40,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: GameOverScreen
+    uniqueID: 2562610209
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
