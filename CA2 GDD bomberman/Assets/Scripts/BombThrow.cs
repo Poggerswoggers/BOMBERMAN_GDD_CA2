@@ -131,7 +131,11 @@ public class BombThrow : MonoBehaviour
             {
                 nearbyObjects.GetComponent<IceWall>().health=0;
             }
-           
+            if (nearbyObjects.GetComponent<BoomBot>())
+            {
+                Destroy(nearbyObjects.gameObject);
+            }
+
         }
 
         //removes bomb after exploded

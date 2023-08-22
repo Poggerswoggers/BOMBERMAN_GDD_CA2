@@ -6,7 +6,7 @@ using Cinemachine;
 public class UpdatedPlayerController : MonoBehaviour
 {
     public Camera cam;
-    public float currentIceWallCD = 0f;
+    
     public Cinemachine3rdPersonAim tpsAimCam;
 
     [Header("Grenade")]
@@ -21,13 +21,21 @@ public class UpdatedPlayerController : MonoBehaviour
 
     [Header("IceWall")]
     private bool isUsingWall = false;
-    public float iceWallCD = 14f;
+    public float iceWallCD = 14f; 
+    public float currentIceWallCD = 0f;
     public KeyCode wallCastKeybind, directionKeybind;
     public float wallRange;
     public GameObject iceWallPreview, iceWallObject;
     public LayerMask layermask;
     private bool direction, casting;
+   
 
+    [Header("BoomBot")]
+    public GameObject boomBotPrefab;
+    public float boomBotCD = 12f;
+    public float currentBoomBotCD = 0f;
+    public KeyCode boomBotKeybind;
+    public float spawnRange;
 
 
     [SerializeField] private Transform debugTransform;
@@ -114,7 +122,15 @@ public class UpdatedPlayerController : MonoBehaviour
 
            
         }
+        //ice wall cooldown
         else if(currentIceWallCD > 0) currentIceWallCD -= Time.deltaTime;
+
+        if(Input.GetKeyDown(boomBotKeybind) && currentBoomBotCD <= 0)
+        {
+            CastingBoomBot();
+        }
+        //boombot cooldown
+        else if(currentBoomBotCD > 0) currentBoomBotCD -= Time.deltaTime;
         
 
     }
@@ -167,7 +183,16 @@ public class UpdatedPlayerController : MonoBehaviour
         if (Input.GetKeyDown(directionKeybind))
         {
             direction = !direction;
+            
         }
 
+    }
+
+    void CastingBoomBot()
+    {
+        Vector3 spawnPos = cam.transform.forward * spawnRange;
+        Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
+
+        currentBoomBotCD = boomBotCD;
     }
 }
