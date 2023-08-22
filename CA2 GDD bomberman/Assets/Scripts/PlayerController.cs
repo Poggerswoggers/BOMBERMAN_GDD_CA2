@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int playerMaxHealth = 100;
+    public int playerCurrentHealth;
+    public HealthBar healthBar;
+
+
     public bool isGrounded;
     public int moveSpeed = 15;
     public float jumpHeight = 2f;
@@ -15,18 +20,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsGround;
 
-
+    public Animator anim;
     CharacterController cc;
     public CameraControl cameraControlRef;
+    LevelManager lvlManager;
 
     public enum players { P1 , P2}
     public players currentPlayer;
+
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
+
+        anim = GetComponentInChildren<Animator>();
+
+        lvlManager = FindObjectOfType<LevelManager>();
+
+        playerCurrentHealth = playerMaxHealth;
+        healthBar.SetMaxHealth(playerMaxHealth);
+
     }
 
     // Update is called once per frame
@@ -34,7 +50,16 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundcheckPos.position, radius, whatIsGround);
 
+        anim.SetBool("JumpTrigger", !isGrounded);
+    
+
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal" + currentPlayer.ToString()), 0, Input.GetAxisRaw("Vertical" + currentPlayer.ToString()));
+
+        anim.SetFloat("MoveX", dir.x);
+        anim.SetFloat("MoveY", dir.z);
+
+        if (lvlManager.gameOver) return;
+
 
 
         if (dir.magnitude >= 0.1f)
@@ -66,6 +91,24 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         cc.Move(playerVelocity * Time.deltaTime);
         
+
+    }
+
+
+    public void setTrigger()
+    {
+
+    }
+       
+
+    public void TakeDamage(int damage)
+    {
+
+        if (lvlManager.gameOver) return;
+       
+        playerCurrentHealth -= damage;
+
+        healthBar.SetHealth(playerCurrentHealth);
 
     }
 }
