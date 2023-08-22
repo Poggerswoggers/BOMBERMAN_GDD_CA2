@@ -97,23 +97,17 @@ public class PlayerController : MonoBehaviour
         cc.Move(playerVelocity * Time.deltaTime);
         
 
-    }
-
-
-    public void setTrigger()
-    {
-
-    }
-       
+    }       
 
     public void TakeDamage(int damage)
     {
+        if (lvlManager != null)
+        {
+            if (lvlManager.gameOver) return;
+            playerCurrentHealth -= damage;
 
-        if (lvlManager.gameOver) return;
-       
-        playerCurrentHealth -= damage;
 
-        healthBar.SetHealth(playerCurrentHealth);
-
+            healthBar.SetHealth(playerCurrentHealth);
+        }       
     }
 }

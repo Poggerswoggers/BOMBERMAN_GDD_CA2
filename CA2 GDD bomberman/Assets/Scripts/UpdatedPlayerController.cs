@@ -36,6 +36,8 @@ public class UpdatedPlayerController : MonoBehaviour
 
     PlayerController pc;
     LevelManager lvlManager;
+    Animator anim;
+
 
     //NOTE: THIS PLAYER CONTROLLER IS MOSTLY FOR ABILITIES, THE MAIN ONE IS FOR MOVEMENT 
 
@@ -45,6 +47,7 @@ public class UpdatedPlayerController : MonoBehaviour
     {
         pc = GetComponent<PlayerController>();
         lvlManager = FindObjectOfType<LevelManager>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -68,7 +71,12 @@ public class UpdatedPlayerController : MonoBehaviour
 
         if (Input.GetButton("Fire1") && !isUsingWall)
         {
-            if (throwForce >= maxThrowForce) return;
+            if (!onCooldown)
+            {
+                if (throwForce >= maxThrowForce) return;
+                anim.SetBool("IsChargingBomb", true);
+            }
+
             throwForce += throwWindUpRate * Time.deltaTime;
         }
 
@@ -76,7 +84,10 @@ public class UpdatedPlayerController : MonoBehaviour
         {
             if (!onCooldown)
             {
-               
+
+                anim.SetTrigger("ThrowingBomb");
+                anim.SetBool("IsChargingBomb", false);
+
                 ThrowBomb();
                 currentThrowCooldown = throwCooldown;
                 onCooldown = true;

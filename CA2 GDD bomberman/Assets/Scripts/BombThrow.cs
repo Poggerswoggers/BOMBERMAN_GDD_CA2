@@ -8,8 +8,15 @@ public class BombThrow : MonoBehaviour
     public float blastRadius = 4f;
     public float knockbackForce = 2f;
 
+    private Material bombDefault;
+    public Color flashingColour;
+    private Color currentColour;
+    private Color defaultColour;
 
-    float explosionCountdown;
+    [SerializeField] private float colorChangeInterval = 1.5f;
+
+
+    [SerializeField] float explosionCountdown;
     public bool startCD;
     bool hasExploded = false;
 
@@ -17,13 +24,18 @@ public class BombThrow : MonoBehaviour
 
     Rigidbody rigidBody;
 
+    [Header("AduioClips")]    
+    public AudioClip bombExplode;
+    public AudioClip ticking;
 
     // Start is called before the first frame update
     void Start()
     {
         explosionCountdown = explosionDelay;
         rigidBody = GetComponent<Rigidbody>();
-        
+        bombDefault = GetComponent<Renderer>().material;
+        currentColour = bombDefault.color;
+        defaultColour = currentColour;
     }
 
     // Update is called once per frame
@@ -33,6 +45,20 @@ public class BombThrow : MonoBehaviour
         if (startCD)
         {
             explosionCountdown -= Time.deltaTime;
+
+            if(explosionCountdown <= colorChangeInterval)
+            {   
+                
+                currentColour = (currentColour == defaultColour) ? flashingColour : defaultColour;
+                bombDefault.color = currentColour;
+
+                if(bombDefault.color == flashingColour)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(ticking);
+                }
+
+                colorChangeInterval *= 0.9f;
+            }
 
             if(explosionCountdown < 0.01 && !hasExploded)
             {
@@ -58,6 +84,7 @@ public class BombThrow : MonoBehaviour
 
     public void Explode()
     {
+        AudioSource.PlayClipAtPoint(bombExplode,transform.position);
         //bomb explosion visual
         Instantiate(explosionEffect, transform.position, transform.rotation);
 
