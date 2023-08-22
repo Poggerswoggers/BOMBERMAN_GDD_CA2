@@ -58,8 +58,10 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("MoveX", dir.x);
         anim.SetFloat("MoveY", dir.z);
 
-        if (lvlManager.gameOver) return;
-
+        if (lvlManager != null)
+        {
+            if (lvlManager.gameOver) return;
+        }
 
 
         if (dir.magnitude >= 0.1f)

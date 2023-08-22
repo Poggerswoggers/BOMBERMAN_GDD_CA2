@@ -51,7 +51,10 @@ public class UpdatedPlayerController : MonoBehaviour
     void Update()
     {
 
-        if (lvlManager.gameOver) return;
+        if (lvlManager != null)
+        {
+            if (lvlManager.gameOver) return;
+        }
 
 
         Vector3 viewportCenter = new Vector3(0.5f, 0.5f, cam.nearClipPlane);

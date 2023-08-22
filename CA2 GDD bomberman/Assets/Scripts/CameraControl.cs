@@ -28,7 +28,10 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
-        if (lvlManager.gameOver) return;
+        if (lvlManager != null)
+        {
+            if (lvlManager.gameOver) return;
+        }
 
         mouseX  += Input.GetAxisRaw("Mouse X") * sensX;
         mouseY  -= Input.GetAxisRaw("Mouse Y") * sensY;
