@@ -52,6 +52,55 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-4546975840975978990
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New State
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 6784550242810742814}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1101 &-3744971820926527526
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4546975840975978990}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.9025974
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!206 &-1134080062698647472
 BlendTree:
   m_ObjectHideFlags: 1
@@ -64,7 +113,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: d7be5db32ddc24f46959b3a7da544bd9, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveX
     m_Mirror: 0
@@ -72,7 +121,7 @@ BlendTree:
     m_Motion: {fileID: 8130411845881863249, guid: 735526e493ae74f46bcb531c805a6db5, type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 0.5}
-    m_TimeScale: 1
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveX
     m_Mirror: 0
@@ -80,7 +129,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 00f94f3c63bc1a04199ee5f6088a5dad, type: 3}
     m_Threshold: 0.5
     m_Position: {x: -0.5, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveX
     m_Mirror: 0
@@ -88,7 +137,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: 93fc9909defae564a8d1f5cb52e4440a, type: 3}
     m_Threshold: 0.75
     m_Position: {x: 0, y: -0.5}
-    m_TimeScale: 1
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveX
     m_Mirror: 0
@@ -96,7 +145,7 @@ BlendTree:
     m_Motion: {fileID: -203655887218126122, guid: f985ada0b3bfe284ab6103c8f24819b8, type: 3}
     m_Threshold: 1
     m_Position: {x: 0.5, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveX
     m_Mirror: 0
@@ -153,6 +202,43 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Upper Body
+    m_StateMachine: {fileID: 2151646881994931555}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+--- !u!1107 &2151646881994931555
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Upper Body
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: -4546975840975978990}
+    m_Position: {x: 380, y: 0, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3658714413840117802}
+    m_Position: {x: 390, y: 140, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: -4546975840975978990}
 --- !u!1101 &2391309712367775661
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -178,6 +264,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &3658714413840117802
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Throw Object
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -3744971820926527526}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -203655887218126122, guid: 6dffac223c674234588c8a4d1fa8446c, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &4689211255759116280
 AnimatorState:
   serializedVersion: 6
@@ -205,6 +318,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &6784550242810742814
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3658714413840117802}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1107 &9026660891720002659
 AnimatorStateMachine:
   serializedVersion: 6
