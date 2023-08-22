@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsGround;
 
-
+    public Animator anim;
     CharacterController cc;
     public CameraControl cameraControlRef;
 
@@ -23,10 +23,12 @@ public class PlayerController : MonoBehaviour
     public players currentPlayer;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -34,8 +36,13 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundcheckPos.position, radius, whatIsGround);
 
+        anim.SetBool("JumpTrigger", !isGrounded);
+    
+
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal" + currentPlayer.ToString()), 0, Input.GetAxisRaw("Vertical" + currentPlayer.ToString()));
 
+        anim.SetFloat("MoveX", dir.x);
+        anim.SetFloat("MoveY", dir.z);
 
         if (dir.magnitude >= 0.1f)
         {
@@ -67,5 +74,10 @@ public class PlayerController : MonoBehaviour
         cc.Move(playerVelocity * Time.deltaTime);
         
 
+    }
+
+    public void setTrigger()
+    {
+       
     }
 }

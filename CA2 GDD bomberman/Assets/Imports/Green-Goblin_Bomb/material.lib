@@ -1,0 +1,42 @@
+# Aspose.3D Wavefront OBJ Exporter
+# Copyright 2004-2023 Aspose Pty Ltd.
+# File created: 08/22/2023 08:38:10
+
+newmtl Orange
+	illum 2
+	Kd 0.35055598616600036 0.07908400148153305 0.00636932021006941
+	Ke 0 0 0
+	Pr 0
+	Pm 0
+	d 1
+	Tr 0
+	map_Pr Orange_metallicRoughness_metal.jpg
+	map_Pm Orange_metallicRoughness_metal.jpg
+newmtl Light
+	illum 2
+	Kd 0.4109390079975128 0.4109390079975128 0.4109390079975128
+	Ke 0 0 0
+	Pr 0.19117599725723268
+	Pm 1
+	d 1
+	Tr 0
+newmtl Ring
+	illum 2
+	Kd 0 0 0
+	Ke 0 0 0
+	Pr 0
+	Pm 0
+	d 1
+	Tr 0
+	map_Pr Ring_metallicRoughness_metal_scale0.jpg
+	map_Pm Ring_metallicRoughness_metal_scale0.jpg
+newmtl Grip
+	illum 2
+	Kd 0.24133899807929992 0.05356816947460175 0.00411641551181674
+	Ke 0 0 0
+	Pr 0
+	Pm 0
+	d 1
+	Tr 0
+	map_Pr Grip_metallicRoughness_metal_scale1.jpg
+	map_Pm Grip_metallicRoughness_metal_scale1.jpg

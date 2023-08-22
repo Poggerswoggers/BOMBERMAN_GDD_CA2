@@ -64,6 +64,7 @@ public class UpdatedPlayerController : MonoBehaviour
         {
             if (!onCooldown)
             {
+               
                 ThrowBomb();
                 currentThrowCooldown = throwCooldown;
                 onCooldown = true;
