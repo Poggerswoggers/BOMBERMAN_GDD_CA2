@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInputYes",
+    "name": "New_player_input",
     "maps": [
         {
             "name": "Player",
@@ -141,6 +141,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "608e31d0-8dfd-43db-92c8-9644c1a9d728",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
