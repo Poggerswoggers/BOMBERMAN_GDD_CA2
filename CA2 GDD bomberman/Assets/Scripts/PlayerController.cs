@@ -35,14 +35,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         cc = GetComponent<CharacterController>();
-<<<<<<< Updated upstream
+
         anim = GetComponentInChildren<Animator>();
-=======
+
         lvlManager = FindObjectOfType<LevelManager>();
 
         playerCurrentHealth = playerMaxHealth;
         healthBar.SetMaxHealth(playerMaxHealth);
->>>>>>> Stashed changes
+
     }
 
     // Update is called once per frame
@@ -55,13 +55,12 @@ public class PlayerController : MonoBehaviour
 
         Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal" + currentPlayer.ToString()), 0, Input.GetAxisRaw("Vertical" + currentPlayer.ToString()));
 
-<<<<<<< Updated upstream
         anim.SetFloat("MoveX", dir.x);
         anim.SetFloat("MoveY", dir.z);
-=======
+
         if (lvlManager.gameOver) return;
 
->>>>>>> Stashed changes
+
 
         if (dir.magnitude >= 0.1f)
         {
@@ -95,16 +94,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
-<<<<<<< Updated upstream
+
     public void setTrigger()
     {
+
+    }
        
-=======
+
     public void TakeDamage(int damage)
     {
+
+        if (lvlManager.gameOver) return;
+       
         playerCurrentHealth -= damage;
 
         healthBar.SetHealth(playerCurrentHealth);
->>>>>>> Stashed changes
+
     }
 }
