@@ -6,6 +6,7 @@ using Cinemachine;
 public class UpdatedPlayerController : MonoBehaviour
 {
     public Camera cam;
+    public float currentIceWallCD = 0f;
     public Cinemachine3rdPersonAim tpsAimCam;
 
     [Header("Grenade")]
@@ -14,13 +15,13 @@ public class UpdatedPlayerController : MonoBehaviour
     public float throwWindUpRate = 10f;
     public float maxThrowForce = 40f;
     public float throwCooldown = 2.5f;
+    public float upwardsThrowForce = 2f;
     float currentThrowCooldown;
     bool onCooldown = false;
 
     [Header("IceWall")]
     private bool isUsingWall = false;
     public float iceWallCD = 14f;
-    public float currentIceWallCD = 0f;
     public KeyCode wallCastKeybind, directionKeybind;
     public float wallRange;
     public GameObject iceWallPreview, iceWallObject;
@@ -34,16 +35,24 @@ public class UpdatedPlayerController : MonoBehaviour
     public Transform firePoint;
 
     PlayerController pc;
+    LevelManager lvlManager;
+
+    //NOTE: THIS PLAYER CONTROLLER IS MOSTLY FOR ABILITIES, THE MAIN ONE IS FOR MOVEMENT 
+
 
     // Start is called before the first frame update
     void Start()
     {
         pc = GetComponent<PlayerController>();
+        lvlManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (lvlManager.gameOver) return;
+
 
         Vector3 viewportCenter = new Vector3(0.5f, 0.5f, cam.nearClipPlane);
         Ray ray = cam.ViewportPointToRay(viewportCenter);
@@ -83,7 +92,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
         if (casting) CastingIceWall();
 
-        if (Input.GetKeyDown(wallCastKeybind) && currentIceWallCD <- 0)
+        if (Input.GetKeyDown(wallCastKeybind) && currentIceWallCD <= 0)
         {
             casting = !casting; //casting = false;
             if (!casting) iceWallPreview.SetActive(false);
@@ -91,7 +100,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
            
         }
-        else currentIceWallCD -= Time.deltaTime;
+        else if(currentIceWallCD > 0) currentIceWallCD -= Time.deltaTime;
         
 
     }
@@ -104,7 +113,8 @@ public class UpdatedPlayerController : MonoBehaviour
         //quaternion.lookRot(aimDir);
 
         Vector3 aimDirection = (debugTransform.position - firePoint.position).normalized;
-        rb.AddForce(aimDirection * throwForce, ForceMode.VelocityChange);
+        Vector3 forceToAdd = aimDirection * throwForce + transform.up * upwardsThrowForce;
+        rb.AddForce(forceToAdd, ForceMode.VelocityChange);
 
         Debug.Log(aimDirection);
 

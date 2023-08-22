@@ -14,17 +14,22 @@ public class CameraControl : MonoBehaviour
     [Header("AimCamera")]
     [SerializeField] private CinemachineVirtualCamera aimCamera;
 
+    public LevelManager lvlManager;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        lvlManager = FindObjectOfType<LevelManager>();
     }
 
 
 
     private void Update()
     {
+        if (lvlManager.gameOver) return;
+
         mouseX  += Input.GetAxisRaw("Mouse X") * sensX;
         mouseY  -= Input.GetAxisRaw("Mouse Y") * sensY;
 

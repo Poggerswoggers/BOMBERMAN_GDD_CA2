@@ -5,7 +5,7 @@ using UnityEngine;
 public class BombThrow : MonoBehaviour
 {
     public float explosionDelay = 3f;
-    public float blastRadius = 5f;
+    public float blastRadius = 4f;
     public float knockbackForce = 2f;
 
 
@@ -75,6 +75,30 @@ public class BombThrow : MonoBehaviour
             if (nearbyObjects.GetComponent<PlayerController>())
             {
                 //apply damage
+                float bombDistance = Vector3.Distance(nearbyObjects.transform.position, gameObject.transform.position);
+                if(bombDistance < 1)
+                {
+                    nearbyObjects.GetComponent<PlayerController>().TakeDamage(40);
+
+                }
+                else if (bombDistance < 2)
+                {
+                    nearbyObjects.GetComponent<PlayerController>().TakeDamage(30);
+
+                }
+                else if (bombDistance < 3)
+                {
+                    nearbyObjects.GetComponent<PlayerController>().TakeDamage(20);
+
+                }
+                else if (bombDistance <= 4)
+                {
+                    nearbyObjects.GetComponent<PlayerController>().TakeDamage(10);
+
+                }
+
+
+
             }
             if (nearbyObjects.GetComponent<IceWall>())
             {
@@ -84,9 +108,8 @@ public class BombThrow : MonoBehaviour
         }
 
         //removes bomb after exploded
-       
         Destroy(gameObject);
+        
 
     }
-
 }
