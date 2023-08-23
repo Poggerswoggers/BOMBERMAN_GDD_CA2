@@ -128,11 +128,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -6803169544883306252, guid: d7be5db32ddc24f46959b3a7da544bd9, type: 3}
   m_PrefabInstance: {fileID: 1585147443}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &37173454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8950543313467809907, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-  m_PrefabInstance: {fileID: 8950543312809001971}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &153365955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,28 +1401,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8950543313467809909, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
   m_PrefabInstance: {fileID: 8950543312809001971}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37173454}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b849ef335f7730a49a11ad35bcceec2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &725984140
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37173454}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &744172251
 GameObject:
   m_ObjectHideFlags: 0
@@ -6530,14 +6509,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8950543313228999196, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8950543313467809904, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8950543313467809906, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6599,37 +6570,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 939787015}
     - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: torque
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
       propertyPath: tpsAimCam
       value: 
       objectReference: {fileID: 237615126}
     - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: spawnRange
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: boomBotPrefab
-      value: 
-      objectReference: {fileID: 388508177888824221, guid: a9a399014cfe17749936c05825be0a36, type: 3}
-    - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: boomBotKeybind
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
       propertyPath: debugTransform
       value: 
       objectReference: {fileID: 1941631949}
-    - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: blastPackPrefab
-      value: 
-      objectReference: {fileID: 8945958016967135493, guid: 6c6b2d3955634ae4599960e6ed8f2b8d, type: 3}
-    - target: {fileID: 8950543313467809914, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
-      propertyPath: blastPackKeybind
-      value: 102
-      objectReference: {fileID: 0}
     - target: {fileID: 8950543314056331850, guid: a86778e3b4a47e143bc26c50c615d8b8, type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
