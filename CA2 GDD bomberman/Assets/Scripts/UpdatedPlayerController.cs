@@ -192,6 +192,14 @@ public class UpdatedPlayerController : MonoBehaviour
     {
         Vector3 spawnPos = cam.transform.forward * spawnRange;
         Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
+        if (gameObject.CompareTag("Player1"))
+        {
+            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player2");
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player1");
+        }
 
         currentBoomBotCD = boomBotCD;
     }

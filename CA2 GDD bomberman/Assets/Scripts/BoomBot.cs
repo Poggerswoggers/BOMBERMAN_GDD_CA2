@@ -9,13 +9,22 @@ public class BoomBot : MonoBehaviour
     private Vector3 player;
 
     public GameObject explosionEffect;
+    public float maxExplosionCD = 2f;
+    public float explosionCD = 2f;
     public float blastRadius = 4f;
     public float knockbackForce = 2f;
-    GameObject targetPlayer;
+    public GameObject targetPlayer; //do not set
+
+    bool startPriming = false; // start to explode countdown
+
+    [Header("AduioClips")]
+    public AudioClip bombExplode;
+    public AudioClip ticking;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        explosionCD = maxExplosionCD;
         
     }
 
@@ -28,6 +37,17 @@ public class BoomBot : MonoBehaviour
 
         if(playerDist <= 3)
         {
+            startPriming = true;
+            //Explode();
+            //GetComponent<AudioSource>().PlayOneShot(ticking);
+        }
+        if (startPriming)
+        {
+            explosionCD -= Time.deltaTime;
+            
+        }
+        if(explosionCD <= 0)
+        {
             Explode();
         }
 
@@ -36,9 +56,9 @@ public class BoomBot : MonoBehaviour
    
     public void GetOtherPlayer(string playerNumber)
     {
-        
+        Debug.Log(playerNumber);
         targetPlayer = GameObject.FindGameObjectWithTag(playerNumber);
-      
+        Debug.Log(targetPlayer);
 
 
     }
@@ -46,6 +66,7 @@ public class BoomBot : MonoBehaviour
     void Explode()
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(bombExplode, transform.position);
 
         //obtain all objects hit by grenade explosion
         Collider[] hit = Physics.OverlapSphere(transform.position, blastRadius);
