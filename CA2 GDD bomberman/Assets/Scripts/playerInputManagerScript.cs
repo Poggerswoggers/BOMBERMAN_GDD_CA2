@@ -7,6 +7,8 @@ public class playerInputManagerScript : MonoBehaviour
 {
     private PlayerInputManager playerInputManager;
 
+    public Transform warmupSpawn;
+
     public List<string> camLayer;
     public int stringInt;
     public LayerMask player1Mask;
@@ -59,9 +61,9 @@ public class playerInputManagerScript : MonoBehaviour
         {
             playerCam.cullingMask = ~player1Mask;
         }
-
-
         stringInt++;
+
+        playerObject.position = warmupSpawn.position + new Vector3(0,2,0);
     }
 
 }
