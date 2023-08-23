@@ -8,7 +8,7 @@ public class Teleporter : MonoBehaviour
     public GameObject eastTP;
 
     public float timeBeforeTP = 4f;
-    public bool westTPCheck;
+    public bool westTPCheck = false;
     //true for west teleporter
     //false for east teleporter
 
@@ -28,26 +28,29 @@ public class Teleporter : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.GetComponentInParent<UpdatedPlayerController>())
         {
             Debug.Log("collision");
             if(collision.gameObject.GetComponentInParent<UpdatedPlayerController>().teleportCD <= 0 )
             {
-
+                Debug.Log("successful tp");
                 collision.gameObject.GetComponentInParent<AudioSource>().PlayOneShot(teleportSuccess);
 
-                if (westTPCheck) //if this is west tp
+                if (westTPCheck == true) //if this is west tp
                 {
+                    Debug.Log("this is west TP");
                     //collision.gameObject.transform.position = eastTP.transform.position;
                     collision.gameObject.transform.position = new Vector3(eastTP.transform.position.x,collision.gameObject.transform.position.y,eastTP.transform.position.z - 2);
                     collision.gameObject.GetComponentInParent<UpdatedPlayerController>().teleportCD = timeBeforeTP;
                     collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
 
                 }
-                else if(!westTPCheck) // if this is east tp
+                else if(westTPCheck == false) // if this is east tp
                 {
+
+                    Debug.Log("this is east TP");
                     //collision.gameObject.transform.position = westTP.transform.position;
                     collision.gameObject.transform.position = new Vector3(westTP.transform.position.x, collision.gameObject.transform.position.y, westTP.transform.position.z + 2);
                     collision.gameObject.GetComponentInParent<UpdatedPlayerController>().teleportCD = timeBeforeTP;
