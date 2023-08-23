@@ -30,31 +30,37 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponentInParent<UpdatedPlayerController>())
+        if (collision.gameObject.GetComponent<UpdatedPlayerController>())
         {
+
             Debug.Log("collision");
-            if(collision.gameObject.GetComponentInParent<UpdatedPlayerController>().teleportCD <= 0 )
+            if(collision.gameObject.GetComponent<UpdatedPlayerController>().teleportCD <= 0 )
             {
                 Debug.Log("successful tp");
-                collision.gameObject.GetComponentInParent<AudioSource>().PlayOneShot(teleportSuccess);
-
+                collision.gameObject.GetComponent<AudioSource>().PlayOneShot(teleportSuccess);
+                CharacterController cc = collision.GetComponent<CharacterController>();
                 if (westTPCheck == true) //if this is west tp
                 {
                     Debug.Log("this is west TP");
                     //collision.gameObject.transform.position = eastTP.transform.position;
+                    cc.enabled = false;
+
                     collision.gameObject.transform.position = new Vector3(eastTP.transform.position.x,collision.gameObject.transform.position.y,eastTP.transform.position.z - 2);
                     collision.gameObject.GetComponentInParent<UpdatedPlayerController>().teleportCD = timeBeforeTP;
-                    collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
+                    //collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
+                    cc.enabled = true;
 
                 }
                 else if(westTPCheck == false) // if this is east tp
                 {
 
                     Debug.Log("this is east TP");
+                    cc.enabled = false;
                     //collision.gameObject.transform.position = westTP.transform.position;
                     collision.gameObject.transform.position = new Vector3(westTP.transform.position.x, collision.gameObject.transform.position.y, westTP.transform.position.z + 2);
                     collision.gameObject.GetComponentInParent<UpdatedPlayerController>().teleportCD = timeBeforeTP;
-                    collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
+                    //collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
+                    cc.enabled = true;
                 }
             }
             else
@@ -74,14 +80,14 @@ public class Teleporter : MonoBehaviour
 
                 collision.gameObject.transform.position = new Vector3(eastTP.transform.position.x, collision.gameObject.transform.position.y, eastTP.transform.position.z - 2);
 
-                collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
+                //collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
 
             }
             else if (!westTPCheck) // if this is east tp
             {
                 collision.gameObject.transform.position = new Vector3(westTP.transform.position.x, collision.gameObject.transform.position.y, westTP.transform.position.z + 2);
 
-                collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
+                //collision.gameObject.transform.RotateAround(transform.position, transform.up, 180f); //rotate 180degrees
             }
         }
 

@@ -39,10 +39,10 @@ public class LevelManager : MonoBehaviour
         {
             CalculateWinner();
         }
-        if (player2.playerCurrentHealth <= 0)
-        {
-            CalculateWinner();
-        }
+        //if (player2.playerCurrentHealth <= 0)
+        //{
+        //    CalculateWinner();
+        //}
         if(currentRoundTime <= 0)
         {
             CalculateWinner();
