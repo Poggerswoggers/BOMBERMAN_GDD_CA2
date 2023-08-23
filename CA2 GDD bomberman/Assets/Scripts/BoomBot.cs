@@ -9,14 +9,31 @@ public class BoomBot : MonoBehaviour
     private Vector3 player;
 
     public GameObject explosionEffect;
+    public float maxExplosionCD = 2f;
+    public float explosionCD = 2f;
     public float blastRadius = 4f;
     public float knockbackForce = 2f;
-    GameObject targetPlayer;
+    public GameObject targetPlayer; //do not set
+
+    bool startPriming = false; // start to explode countdown
+    [Header("Color Stuff")]
+    private Material bombDefault;
+    public Color flashingColour;
+    private Color currentColour;
+    private Color defaultColour;
+    [SerializeField] private float colorChangeInterval = 1.5f;
+
+    [Header("AudioClips")]
+    public AudioClip bombExplode;
+    public AudioClip ticking;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
+        explosionCD = maxExplosionCD;
+        bombDefault = GetComponent<Renderer>().material;
+        currentColour = bombDefault.color;
+        defaultColour = currentColour;
     }
 
     void Update()
@@ -28,6 +45,31 @@ public class BoomBot : MonoBehaviour
 
         if(playerDist <= 3)
         {
+            startPriming = true;
+            //Explode();
+            //GetComponent<AudioSource>().PlayOneShot(ticking);
+        }
+        if (startPriming)
+        {
+            explosionCD -= Time.deltaTime;
+            if (explosionCD <= colorChangeInterval)
+            {
+
+                currentColour = (currentColour == defaultColour) ? flashingColour : defaultColour;
+                bombDefault.color = currentColour;
+
+                if (bombDefault.color == flashingColour)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(ticking);
+                }
+
+                colorChangeInterval *= 0.9f;
+            }
+
+
+        }
+        if (explosionCD <= 0)
+        {
             Explode();
         }
 
@@ -36,9 +78,9 @@ public class BoomBot : MonoBehaviour
    
     public void GetOtherPlayer(string playerNumber)
     {
-        
+        Debug.Log(playerNumber);
         targetPlayer = GameObject.FindGameObjectWithTag(playerNumber);
-      
+        Debug.Log(targetPlayer);
 
 
     }
@@ -46,6 +88,7 @@ public class BoomBot : MonoBehaviour
     void Explode()
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
+        AudioSource.PlayClipAtPoint(bombExplode, transform.position);
 
         //obtain all objects hit by grenade explosion
         Collider[] hit = Physics.OverlapSphere(transform.position, blastRadius);
