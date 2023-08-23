@@ -133,6 +133,22 @@ public class UpdatedPlayerController : MonoBehaviour
     }
 
 
+    public void OnBoomBot(InputAction.CallbackContext context)
+    {
+        if (context.started && currentBoomBotCD <= 0)
+        {
+            CastingBoomBot();
+        }
+    }
+
+    public void OnFire1(InputAction.CallbackContext context)
+    {
+        if (context.started && currentBlastPackCD <= 0)
+        {
+            ThrowBlastPack();
+            currentBlastPackCD = blastPackCD;
+        }
+    }
 
 
     // Update is called once per frame
@@ -212,19 +228,19 @@ public class UpdatedPlayerController : MonoBehaviour
 
 
         //USE BOOM BOT
-        if(Input.GetKeyDown(boomBotKeybind) && currentBoomBotCD <= 0)
-        {
-            CastingBoomBot();
-        }
+        //if(Input.GetKeyDown(boomBotKeybind) && currentBoomBotCD <= 0)
+        //{
+            //CastingBoomBot();
+        //}
         //boombot cooldown
-        else if(currentBoomBotCD > 0) currentBoomBotCD -= Time.deltaTime;
+        if(currentBoomBotCD > 0) currentBoomBotCD -= Time.deltaTime;
         
-        if(Input.GetKeyDown(blastPackKeybind) && currentBlastPackCD <= 0)
-        {
-            ThrowBlastPack();
-            currentBlastPackCD = blastPackCD;
-        }
-        else if(currentBlastPackCD  > 0) currentBlastPackCD -= Time.deltaTime;
+        //if(Input.GetKeyDown(blastPackKeybind) && currentBlastPackCD <= 0)
+        //{
+            //ThrowBlastPack();
+            //currentBlastPackCD = blastPackCD;
+        //}
+        if(currentBlastPackCD  > 0) currentBlastPackCD -= Time.deltaTime;
 
     }
 
