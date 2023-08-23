@@ -44,7 +44,11 @@ public class PlayerController : MonoBehaviour
         lvlManager = FindObjectOfType<LevelManager>();
 
         playerCurrentHealth = playerMaxHealth;
-        healthBar.SetMaxHealth(playerMaxHealth);
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(playerMaxHealth);
+        }
 
     }
 

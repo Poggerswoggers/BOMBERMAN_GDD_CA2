@@ -1278,7 +1278,7 @@ GameObject:
   - component: {fileID: 2496670142096597073}
   m_Layer: 9
   m_Name: P1 AimCam
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1549,7 +1549,7 @@ GameObject:
   - component: {fileID: 2496670143128542845}
   m_Layer: 9
   m_Name: P1 FollowCam
-  m_TagString: Untagged
+  m_TagString: Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1778,7 +1778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2496670143237591937
 Transform:
   m_ObjectHideFlags: 0

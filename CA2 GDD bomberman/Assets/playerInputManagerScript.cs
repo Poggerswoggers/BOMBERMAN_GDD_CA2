@@ -6,6 +6,12 @@ using UnityEngine.InputSystem;
 public class playerInputManagerScript : MonoBehaviour
 {
     private PlayerInputManager playerInputManager;
+
+    public List<string> camLayer;
+    public int stringInt;
+    public LayerMask player1Mask;
+    public LayerMask player2Mask;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -27,24 +33,35 @@ public class playerInputManagerScript : MonoBehaviour
     {
         Debug.Log("Ran");
         // Get the GameObject representing the player
-        GameObject playerObject = playerInput.gameObject;
+        Transform playerObject = playerInput.gameObject.transform.parent;
+        Debug.Log(playerObject);
 
-        // Access the Camera component of the player
-        Component[] componentsWithTag = playerObject.GetComponents<Component>();
-
-        // Get the layer index for the "p2" layer
-        int p2LayerIndex = LayerMask.NameToLayer("P2 Cam");
-
-        foreach (Component component in componentsWithTag)
+        //
+        for (int i= 0; i<playerObject.childCount; i++)
         {
-            if (component.CompareTag("Cameras"))
+            Transform childTransform = playerObject.transform.GetChild(i);
+            if (childTransform.tag == "Camera")
             {
-                // Set the layer of the component to the "p2" layer
-                if (component.gameObject != null)
-                {
-                    component.gameObject.layer = p2LayerIndex;
-                }
+                int layerInt = LayerMask.NameToLayer(camLayer[stringInt]);
+                
+       
+                childTransform.gameObject.layer = layerInt;
             }
         }
+
+        Camera playerCam = playerObject.GetComponentInChildren<Camera>();
+
+        if (stringInt == 0)
+        {
+            playerCam.cullingMask = ~player2Mask;
+        }
+        else
+        {
+            playerCam.cullingMask = ~player1Mask;
+        }
+
+
+        stringInt++;
     }
+
 }
