@@ -147,7 +147,9 @@ public class UpdatedPlayerController : MonoBehaviour
         if(Input.GetKeyDown(blastPackKeybind) && currentBlastPackCD <= 0)
         {
             ThrowBlastPack();
+            currentBlastPackCD = blastPackCD;
         }
+        else if(currentBlastPackCD  > 0) currentBlastPackCD -= Time.deltaTime;
 
     }
 
