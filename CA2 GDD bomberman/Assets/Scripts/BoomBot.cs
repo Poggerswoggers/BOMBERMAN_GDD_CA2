@@ -79,7 +79,15 @@ public class BoomBot : MonoBehaviour
     public void GetOtherPlayer(string playerNumber)
     {
         Debug.Log(playerNumber);
-        targetPlayer = GameObject.FindGameObjectWithTag(playerNumber);
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+
+        foreach (PlayerController player in players)
+        {
+            if(player.currentPlayer.ToString() == playerNumber)
+            {
+                targetPlayer = player.gameObject;
+            }
+        }
         Debug.Log(targetPlayer);
 
 

@@ -41,8 +41,16 @@ public class CameraControl : MonoBehaviour
 
         follow.rotation = Quaternion.Euler(0, mouseX, 0);
         Target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         
     }
+
 
 
     public void AdsMode(bool aimstate)

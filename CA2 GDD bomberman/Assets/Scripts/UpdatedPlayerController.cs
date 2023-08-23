@@ -285,7 +285,7 @@ public class UpdatedPlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, wallRange, layermask))
         {
-            Debug.Log(hit.transform.gameObject);
+            Debug.Log(hit.transform.gameObject);    
             if (!iceWallPreview.activeSelf)
             {
                 iceWallPreview.SetActive(true);
@@ -325,11 +325,11 @@ public class UpdatedPlayerController : MonoBehaviour
         Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
         if (gameObject.CompareTag("Player1"))
         {
-            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player2");
+            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("P2");
         }
         else if (gameObject.CompareTag("Player2"))
         {
-            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player1");
+            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("P1");
         }
 
         currentBoomBotCD = boomBotCD;

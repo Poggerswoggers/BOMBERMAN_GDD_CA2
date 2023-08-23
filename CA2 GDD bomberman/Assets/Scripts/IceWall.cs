@@ -17,17 +17,25 @@ public class IceWall : MonoBehaviour
     private float blendAmount = 0; //current wall height
     private bool isRaised = false;
 
+
+    public AudioClip breakSound;
+    public AudioClip buildSound;
+    AudioSource audiosource;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         rend = GetComponent<SkinnedMeshRenderer>();
         col = GetComponent<MeshCollider>();
+        audiosource = GetComponent<AudioSource>();
 
         var iceWalls = GetComponentsInChildren<IceWall>();
         foreach(IceWall wall in iceWalls)
         {
             wall.transform.SetParent(null);
         }
+        audiosource.PlayOneShot(buildSound);
     }
 
     // Update is called once per frame
@@ -47,6 +55,8 @@ public class IceWall : MonoBehaviour
 
         if (health <= 0)
         {
+            audiosource.PlayOneShot(breakSound);
+
             Component[] fractures = GetComponentsInChildren(typeof(Rigidbody), true); //get all the fragment game objects
             foreach (Rigidbody child in fractures)
             {

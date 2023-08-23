@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class playerInputManagerScript : MonoBehaviour
 {
+
     private PlayerInputManager playerInputManager;
 
     public Transform warmupSpawn;
@@ -15,21 +16,11 @@ public class playerInputManagerScript : MonoBehaviour
     public LayerMask player2Mask;
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
     }
 
-
-    private void OnEnable()
-    {
-        playerInputManager.onPlayerJoined += HandlePlayerJoin;
-    }
-
-    private void OnDisable()
-    {
-        playerInputManager.onPlayerJoined -= HandlePlayerJoin;
-    }
 
     public void HandlePlayerJoin(PlayerInput playerInput)
     {
@@ -55,15 +46,21 @@ public class playerInputManagerScript : MonoBehaviour
 
         if (stringInt == 0)
         {
+            playerObject.GetComponentInChildren<PlayerController>().currentPlayer = PlayerController.players.P1;
             playerCam.cullingMask = ~player2Mask;
+            
         }
         else
         {
+            playerObject.GetComponentInChildren<PlayerController>().currentPlayer = PlayerController.players.P2;
             playerCam.cullingMask = ~player1Mask;
         }
+    
         stringInt++;
 
         playerObject.position = warmupSpawn.position + new Vector3(0,2,0);
+
+
     }
 
 }

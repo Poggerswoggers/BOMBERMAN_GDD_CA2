@@ -48,10 +48,17 @@ public class PlayerController : MonoBehaviour
 
         playerCurrentHealth = playerMaxHealth;
 
-        if (healthBar != null)
+        if(currentPlayer == players.P1)
         {
-            healthBar.SetMaxHealth(playerMaxHealth);
+            healthBar = lvlManager.player1Hp;
         }
+        else
+        {
+            healthBar = lvlManager.player2Hp;
+        }
+
+
+        healthBar.SetMaxHealth(playerMaxHealth);
 
     }
 
