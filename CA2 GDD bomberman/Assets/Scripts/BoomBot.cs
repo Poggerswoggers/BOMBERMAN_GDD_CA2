@@ -16,8 +16,14 @@ public class BoomBot : MonoBehaviour
     public GameObject targetPlayer; //do not set
 
     bool startPriming = false; // start to explode countdown
+    [Header("Color Stuff")]
+    private Material bombDefault;
+    public Color flashingColour;
+    private Color currentColour;
+    private Color defaultColour;
+    [SerializeField] private float colorChangeInterval = 1.5f;
 
-    [Header("AduioClips")]
+    [Header("AudioClips")]
     public AudioClip bombExplode;
     public AudioClip ticking;
 
@@ -25,7 +31,9 @@ public class BoomBot : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         explosionCD = maxExplosionCD;
-        
+        bombDefault = GetComponent<Renderer>().material;
+        currentColour = bombDefault.color;
+        defaultColour = currentColour;
     }
 
     void Update()
@@ -44,9 +52,23 @@ public class BoomBot : MonoBehaviour
         if (startPriming)
         {
             explosionCD -= Time.deltaTime;
-            
+            if (explosionCD <= colorChangeInterval)
+            {
+
+                currentColour = (currentColour == defaultColour) ? flashingColour : defaultColour;
+                bombDefault.color = currentColour;
+
+                if (bombDefault.color == flashingColour)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(ticking);
+                }
+
+                colorChangeInterval *= 0.9f;
+            }
+
+
         }
-        if(explosionCD <= 0)
+        if (explosionCD <= 0)
         {
             Explode();
         }

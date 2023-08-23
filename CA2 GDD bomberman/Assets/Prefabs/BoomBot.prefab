@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3178785760273635258}
   - component: {fileID: -3434828477669088696}
   - component: {fileID: -6750307955685180851}
+  - component: {fileID: -5372389967717263683}
   m_Layer: 0
   m_Name: BoomBot
   m_TagString: Untagged
@@ -118,6 +119,8 @@ MonoBehaviour:
   blastRadius: 4
   knockbackForce: 2
   targetPlayer: {fileID: 0}
+  flashingColour: {r: 1, g: 0, b: 0, a: 0}
+  colorChangeInterval: 1.5
   bombExplode: {fileID: 8300000, guid: 0aa91343f832ece4787ed4bcd8aa603f, type: 3}
   ticking: {fileID: 8300000, guid: aa8735f9c615959499f7b1553b116513, type: 3}
 --- !u!195 &-3434828477669088696
@@ -238,3 +241,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &-5372389967717263683
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388508177888824221}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 4
+  m_AngularDrag: 3
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

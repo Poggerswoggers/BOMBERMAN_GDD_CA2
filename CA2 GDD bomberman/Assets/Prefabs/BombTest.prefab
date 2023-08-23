@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionDelay: 3
   blastRadius: 4
-  knockbackForce: 10
+  knockbackForce: 500
   flashingColour: {r: 1, g: 1, b: 1, a: 0}
   colorChangeInterval: 1.5
   explosionCountdown: 0
@@ -130,7 +130,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3522797051404748978}
   serializedVersion: 2
-  m_Mass: 6
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1

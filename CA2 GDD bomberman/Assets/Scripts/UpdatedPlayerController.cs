@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class UpdatedPlayerController : MonoBehaviour
 {
@@ -36,6 +37,15 @@ public class UpdatedPlayerController : MonoBehaviour
     public float currentBoomBotCD = 0f;
     public KeyCode boomBotKeybind;
     public float spawnRange;
+
+    [Header("BlastPack")]
+    public GameObject blastPackPrefab;
+    public float blastPackThrowForce = 30f;
+    public float blastPackCD = 6f;
+    public float currentBlastPackCD = 0f;
+    public float torque = 1f;
+    public KeyCode blastPackKeybind;
+    
 
 
     [SerializeField] private Transform debugTransform;
@@ -125,6 +135,8 @@ public class UpdatedPlayerController : MonoBehaviour
         //ice wall cooldown
         else if(currentIceWallCD > 0) currentIceWallCD -= Time.deltaTime;
 
+
+        //USE BOOM BOT
         if(Input.GetKeyDown(boomBotKeybind) && currentBoomBotCD <= 0)
         {
             CastingBoomBot();
@@ -132,6 +144,10 @@ public class UpdatedPlayerController : MonoBehaviour
         //boombot cooldown
         else if(currentBoomBotCD > 0) currentBoomBotCD -= Time.deltaTime;
         
+        if(Input.GetKeyDown(blastPackKeybind) && currentBlastPackCD <= 0)
+        {
+            ThrowBlastPack();
+        }
 
     }
 
@@ -147,6 +163,25 @@ public class UpdatedPlayerController : MonoBehaviour
         rb.AddForce(forceToAdd, ForceMode.VelocityChange);
 
         Debug.Log(aimDirection);
+
+    }
+
+    void ThrowBlastPack()
+    {
+        GameObject blastPack = Instantiate(blastPackPrefab, firePoint.position, transform.rotation);
+        Rigidbody rb = blastPack.GetComponent<Rigidbody>();
+
+        Vector3 aimDirection = (debugTransform.position - firePoint.position).normalized;
+        Vector3 forceToAdd = aimDirection * blastPackThrowForce + transform.up * upwardsThrowForce;
+
+        //rb.AddTorque(rb.transform.up * torque);
+        rb.AddTorque(0, 1 * torque, 0  ,ForceMode.Force);
+        rb.AddForce(forceToAdd, ForceMode.VelocityChange);
+
+        Debug.Log(aimDirection);
+
+
+
 
     }
 
@@ -190,7 +225,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
     void CastingBoomBot()
     {
-        Vector3 spawnPos = cam.transform.forward * spawnRange;
+        Vector3 spawnPos = gameObject.transform.position + transform.forward  * spawnRange;
         Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
         if (gameObject.CompareTag("Player1"))
         {
