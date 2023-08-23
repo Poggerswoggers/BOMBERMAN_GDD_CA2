@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
     public enum players { P1 , P2}
     public players currentPlayer;
 
+    public GameObject cooldownui;
+
+
+
     private Vector2 movementInput = Vector2.zero;
 
 
@@ -51,15 +55,17 @@ public class PlayerController : MonoBehaviour
         if(currentPlayer == players.P1)
         {
             healthBar = lvlManager.player1Hp;
+            cooldownui = lvlManager.player1UI;
         }
         else
         {
             healthBar = lvlManager.player2Hp;
+            cooldownui = lvlManager.player2UI;
         }
 
 
         healthBar.SetMaxHealth(playerMaxHealth);
-
+        connectCds();
     }
 
     
@@ -95,6 +101,13 @@ public class PlayerController : MonoBehaviour
         cameraControlRef.GetComponent<CameraControl>().mousePos = context.ReadValue<Vector2>();
     }
 
+    public void connectCds()
+    {
+        for(int i=0; i < cooldownui.transform.childCount; i++)
+        {
+            Debug.Log(cooldownui.transform.GetChild(i));
+        }
+    }
 
     // Update is called once per frame
     void Update()

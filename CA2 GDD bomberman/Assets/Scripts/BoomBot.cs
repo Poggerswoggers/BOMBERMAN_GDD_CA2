@@ -74,7 +74,7 @@ public class BoomBot : MonoBehaviour
         }
 
     }
-
+        
    
     public void GetOtherPlayer(string playerNumber)
     {

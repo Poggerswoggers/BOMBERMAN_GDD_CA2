@@ -18,6 +18,9 @@ public class LevelManager : MonoBehaviour
     public PlayerController player1;
     public PlayerController player2;
 
+    [Header("CdUI")]
+    public GameObject player1UI;
+    public GameObject player2UI;
 
     public float warmUpTime = 15;
 
@@ -47,6 +50,9 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
+
 
 
         if (Input.GetKeyDown(KeyCode.Escape))
