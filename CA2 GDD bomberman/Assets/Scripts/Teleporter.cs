@@ -32,7 +32,7 @@ public class Teleporter : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<UpdatedPlayerController>())
         {
-            
+            Debug.Log("collision");
             if(collision.gameObject.GetComponent<UpdatedPlayerController>().teleportCD <= 0 )
             {
 
