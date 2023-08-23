@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             if (lvlManager.gameOver) return;
             playerCurrentHealth -= damage;
+            if(playerCurrentHealth > 100) playerCurrentHealth = 100;
 
 
             healthBar.SetHealth(playerCurrentHealth);

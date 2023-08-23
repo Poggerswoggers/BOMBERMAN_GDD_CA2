@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour
 {
     public float currentTimer;
-    public float rechargeTimer = 20f;
+    public float rechargeTimer = 15f;
     public int healAmmount = 30;
 
     public bool hpReady;
@@ -44,10 +44,20 @@ public class HealthPack : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() && hpReady)
+        if (collision.gameObject.GetComponentInParent<PlayerController>() && hpReady)
         {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage(-healAmmount);
-            aS.PlayOneShot(healAudio);
+            Debug.Log("Player detected");
+
+            if(collision.gameObject.GetComponentInParent<PlayerController>().playerCurrentHealth != 100)
+            {
+                collision.gameObject.GetComponentInParent<PlayerController>().TakeDamage(-healAmmount);
+                aS.PlayOneShot(healAudio);
+                currentTimer = rechargeTimer;
+
+
+                
+            }
+            
         }
     }
    
