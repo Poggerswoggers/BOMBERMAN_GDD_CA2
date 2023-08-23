@@ -83,11 +83,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnBombing(InputAction.CallbackContext context)
-    {
-        if (context.performed) ;
-    }
-
     public void Rotate(InputAction.CallbackContext context)
     {
         cameraControlRef.GetComponent<CameraControl>().mousePos = context.ReadValue<Vector2>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.ProBuilder.Shapes;
+using UnityEngine.InputSystem;
 
 public class UpdatedPlayerController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class UpdatedPlayerController : MonoBehaviour
     public float teleportCD = 0f;
 
     [Header("Grenade")]
+    public bool isCharging; 
+
     public GameObject bombPrefab;
     public float throwForce = 10f;
     public float throwWindUpRate = 10f;
@@ -23,14 +26,16 @@ public class UpdatedPlayerController : MonoBehaviour
     bool onCooldown = false;
 
     [Header("IceWall")]
-    private bool isUsingWall = false;
+    public bool canCastIceWall;
+
+    [SerializeField] private bool isUsingWall = false;
     public float iceWallCD = 14f; 
     public float currentIceWallCD = 0f;
     public KeyCode wallCastKeybind, directionKeybind;
     public float wallRange;
     public GameObject iceWallPreview, iceWallObject;
     public LayerMask layermask;
-    private bool direction, casting;
+    [SerializeField] private bool direction, casting;
    
 
     [Header("BoomBot")]
@@ -70,6 +75,66 @@ public class UpdatedPlayerController : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        Debug.Log("tewwst");
+        if (context.started)
+        {
+            if (isUsingWall)
+            { 
+                canCastIceWall = true;
+            }
+            else
+            {
+                isCharging = true;
+            }
+        }
+
+
+        if(context.canceled)
+        {
+            if (canCastIceWall)
+            {
+                canCastIceWall = false;
+            }
+
+
+            else if(!onCooldown)
+            {   
+                isCharging = false;
+
+                anim.SetTrigger("ThrowingBomb");
+                anim.SetBool("IsChargingBomb", false);            
+
+                ThrowBomb();
+                currentThrowCooldown = throwCooldown;
+                onCooldown = true;
+            }
+            throwForce = 10f;
+        }
+        else
+        {
+            //canCastIceWall = false;
+        }
+    }
+
+    public void preIceWall(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            isUsingWall = true;
+        }
+        if (context.canceled)
+        {
+            isUsingWall = false;
+            iceWallPreview.SetActive(false);
+        }
+    }
+
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -95,30 +160,33 @@ public class UpdatedPlayerController : MonoBehaviour
 
 
 
-        if (Input.GetButton("Fire1") && !isUsingWall)
+        if (isCharging && !isUsingWall)
         {
+            Debug.Log("tewwst");
             if (!onCooldown)
             {
                 if (throwForce >= maxThrowForce) return;
                 anim.SetBool("IsChargingBomb", true);
+                throwForce += throwWindUpRate * Time.deltaTime;
             }
 
-            throwForce += throwWindUpRate * Time.deltaTime;
+            //throwForce += throwWindUpRate * Time.deltaTime;
         }
 
-        if (Input.GetButtonUp("Fire1") && !isUsingWall)
+
+        //if (Input.GetButtonUp("Fire1") && !isUsingWall)
         {
-            if (!onCooldown)
+            //if (!onCooldown)
             {
 
-                anim.SetTrigger("ThrowingBomb");
-                anim.SetBool("IsChargingBomb", false);
+                //anim.SetTrigger("ThrowingBomb");
+                //anim.SetBool("IsChargingBomb", false);
 
-                ThrowBomb();
-                currentThrowCooldown = throwCooldown;
-                onCooldown = true;
+                //ThrowBomb();
+                //currentThrowCooldown = throwCooldown;
+                //onCooldown = true;
             }
-            throwForce = 10f;
+            //throwForce = 10f;
             
         }
 
@@ -130,16 +198,15 @@ public class UpdatedPlayerController : MonoBehaviour
         else onCooldown = false;
 
 
-        if (casting) CastingIceWall();
 
-        if (Input.GetKeyDown(wallCastKeybind) && currentIceWallCD <= 0)
+        if (isUsingWall && currentIceWallCD <= 0)
         {
-            casting = !casting; //casting = false;
-            if (!casting) iceWallPreview.SetActive(false);
-            isUsingWall = true;
-
-           
+            CastingIceWall();
+            //if (!casting) iceWallPreview.SetActive(false);
+            //isUsingWall = true;         
         }
+
+
         //ice wall cooldown
         else if(currentIceWallCD > 0) currentIceWallCD -= Time.deltaTime;
 
@@ -197,9 +264,12 @@ public class UpdatedPlayerController : MonoBehaviour
 
     void CastingIceWall()
     {
+
+
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, wallRange, layermask))
         {
+            Debug.Log(hit.transform.gameObject);
             if (!iceWallPreview.activeSelf)
             {
                 iceWallPreview.SetActive(true);
@@ -212,10 +282,10 @@ public class UpdatedPlayerController : MonoBehaviour
             iceWallPreview.transform.localRotation = rotation;
             iceWallPreview.transform.position = hit.point;
 
-            if (Input.GetButtonUp("Fire1"))
+            if (canCastIceWall )
             {
                 Instantiate(iceWallObject, hit.point, iceWallPreview.transform.rotation);
-                casting = false;
+                //canCastIceWall = false;
                 isUsingWall = false;
                 iceWallPreview.SetActive(false);
                 currentIceWallCD = iceWallCD;

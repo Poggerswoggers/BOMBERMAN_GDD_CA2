@@ -892,7 +892,19 @@ MonoBehaviour:
     m_ActionId: 89b6c87d-f9e6-40e0-a50e-c76fd8a1315c
     m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick,/DualShock4GamepadHID1/rightStick,/DualShock4GamepadHID2/rightStick,/DualShock4GamepadHID3/rightStick,/Mouse/delta,/Touchscreen/delta,/Pen/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2496670141502323662}
+        m_TargetAssemblyTypeName: UpdatedPlayerController, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: eb86fe1e-1508-4ab9-96b6-f4452a10aa0d
     m_ActionName: Player/Fire[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID1/rightTrigger,/DualShock4GamepadHID2/rightTrigger,/DualShock4GamepadHID3/rightTrigger,/Mouse/leftButton,/Touchscreen/primaryTouch/tap]
   - m_PersistentCalls:
@@ -967,6 +979,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0c47b940-f179-4161-82fe-9883abed5241
     m_ActionName: Player/Ads[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder,/DualShock4GamepadHID2/leftShoulder,/DualShock4GamepadHID3/leftShoulder,/DualShock4GamepadHID4/leftShoulder,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2496670141502323662}
+        m_TargetAssemblyTypeName: UpdatedPlayerController, Assembly-CSharp
+        m_MethodName: preIceWall
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b4c1dd5b-857c-43bc-a496-89b0dc7d78fd
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1032,23 +1060,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 2496670141791624000}
   tpsAimCam: {fileID: 2496670142096597073}
+  teleportCD: 0
+  isCharging: 0
   bombPrefab: {fileID: 3522797051404748978, guid: abcbcfa77038c6c47b4051e80d5dc6ef, type: 3}
   throwForce: 10
   throwWindUpRate: 10
   maxThrowForce: 40
   throwCooldown: 2.5
   upwardsThrowForce: 5
-  firePoint: {fileID: 2496670141589717425}
+  canCastIceWall: 0
+  isUsingWall: 0
   iceWallCD: 14
   currentIceWallCD: 0
   wallCastKeybind: 9
   directionKeybind: 0
-  wallRange: 0
-  iceWallPreview: {fileID: 0}
-  iceWallObject: {fileID: 0}
+  wallRange: 20
+  iceWallPreview: {fileID: 7830053190373618562}
+  iceWallObject: {fileID: 523724205186814543, guid: 9ee8e7ac4a98c7c4382a9961c0d9b623, type: 3}
   layermask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  direction: 0
+  casting: 0
   boomBotPrefab: {fileID: 0}
   boomBotCD: 12
   currentBoomBotCD: 0
@@ -1061,7 +1094,7 @@ MonoBehaviour:
   torque: 1
   blastPackKeybind: 0
   debugTransform: {fileID: 6382579273426239503}
-  throwingMode: 0
+  firePoint: {fileID: 2496670141589717425}
 --- !u!1 &2496670141589717426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2496670141589717426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.165, y: -0.289, z: 0.87}
+  m_LocalPosition: {x: -0.165, y: -0.289, z: 1.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1912,6 +1945,7 @@ Transform:
   - {fileID: 2496670141791624015}
   - {fileID: 2496670143128542844}
   - {fileID: 2496670142096597087}
+  - {fileID: 7485615112100931896}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3424,4 +3458,71 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6382579272792914741, guid: 293bc0282b985384eac9bf2acdc40a13, type: 3}
   m_PrefabInstance: {fileID: 650132282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &931848568
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2496670143237591937}
+    m_Modifications:
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.3269732
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.6513553
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7830053190214669050, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+      propertyPath: m_Name
+      value: IceWallPreview
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+--- !u!4 &7485615112100931896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7485615111354746944, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+  m_PrefabInstance: {fileID: 931848568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7830053190373618562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7830053190214669050, guid: f730cbae292653b439b77ffa2dc3f0cb, type: 3}
+  m_PrefabInstance: {fileID: 931848568}
   m_PrefabAsset: {fileID: 0}
