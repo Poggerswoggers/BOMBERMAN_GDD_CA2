@@ -10,6 +10,7 @@ public class CameraControl : MonoBehaviour
     public Transform follow, Target;
     float mouseX, mouseY;
 
+    public Vector2 mousePos;
 
     [Header("AimCamera")]
     [SerializeField] private CinemachineVirtualCamera aimCamera;
@@ -33,8 +34,8 @@ public class CameraControl : MonoBehaviour
             if (lvlManager.gameOver) return;
         }
 
-        mouseX  += Input.GetAxisRaw("Mouse X") * sensX;
-        mouseY  -= Input.GetAxisRaw("Mouse Y") * sensY;
+        mouseX  += mousePos.x * sensX;
+        mouseY  -= mousePos.y * sensY;
 
         mouseY = Mathf.Clamp(mouseY, -45, 80);
 
@@ -48,10 +49,12 @@ public class CameraControl : MonoBehaviour
     {
         if (aimstate)
         {
+            Debug.Log("test");
             aimCamera.gameObject.SetActive(true);
         }
         else
         {
+            Debug.Log("ran");
             aimCamera.gameObject.SetActive(false);
         }
     }

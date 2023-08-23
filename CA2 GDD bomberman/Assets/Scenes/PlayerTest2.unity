@@ -414,7 +414,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 1401781645}
   - component: {fileID: 1401781644}
   - component: {fileID: 1401781646}
+  - component: {fileID: 1401781647}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -641,6 +642,14 @@ MonoBehaviour:
   player2Mask:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!81 &1401781647
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401781643}
+  m_Enabled: 1
 --- !u!1001 &5042098319321324961
 PrefabInstance:
   m_ObjectHideFlags: 0

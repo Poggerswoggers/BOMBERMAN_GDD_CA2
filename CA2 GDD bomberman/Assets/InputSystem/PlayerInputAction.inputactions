@@ -1,5 +1,5 @@
 {
-    "name": "New_player_input",
+    "name": "PlayerInputAction",
     "maps": [
         {
             "name": "Player",
@@ -36,6 +36,15 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "14d5b2ce-b61f-4bca-bca4-01e7b90d6f39",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ads",
+                    "type": "Button",
+                    "id": "0c47b940-f179-4161-82fe-9883abed5241",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -177,17 +186,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -255,11 +253,33 @@
                 {
                     "name": "",
                     "id": "a6ae6e44-c67a-4f93-be19-b2881880cad2",
-                    "path": "",
+                    "path": "<DualShockGamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "255ba5b1-1a54-4378-bc49-19d6de3a594f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Ads",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03e1084b-67c4-4922-81e7-c6758bf87547",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Ads",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

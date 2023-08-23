@@ -740,10 +740,10 @@ GameObject:
   - component: {fileID: 2496670141502323650}
   - component: {fileID: 2496670141502323651}
   - component: {fileID: 2496670141502323652}
+  - component: {fileID: 5753516391273070413}
   - component: {fileID: 2496670141502323649}
   - component: {fileID: 2496670141502323663}
   - component: {fileID: 2496670141502323662}
-  - component: {fileID: 5753516391273070413}
   m_Layer: 7
   m_Name: Player1
   m_TagString: Untagged
@@ -834,6 +834,144 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5753516391273070413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2496670141502323655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ce5302c743ccd854c9c1801a82e8bbe0, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2496670141502323649}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 640e837a-cfc0-4e6b-88b7-85958c320cbd
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/DualShock4GamepadHID/leftStick,/DualShock4GamepadHID1/leftStick,/DualShock4GamepadHID2/leftStick,/DualShock4GamepadHID3/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2496670141502323649}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Rotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 89b6c87d-f9e6-40e0-a50e-c76fd8a1315c
+    m_ActionName: Player/Look[/DualShock4GamepadHID/rightStick,/DualShock4GamepadHID1/rightStick,/DualShock4GamepadHID2/rightStick,/DualShock4GamepadHID3/rightStick,/Mouse/delta,/Touchscreen/delta,/Pen/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eb86fe1e-1508-4ab9-96b6-f4452a10aa0d
+    m_ActionName: Player/Fire[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID1/rightTrigger,/DualShock4GamepadHID2/rightTrigger,/DualShock4GamepadHID3/rightTrigger,/Mouse/leftButton,/Touchscreen/primaryTouch/tap]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2496670141502323649}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 14d5b2ce-b61f-4bca-bca4-01e7b90d6f39
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f11826d6-05bb-458a-b884-c7212f26d092
+    m_ActionName: UI/Navigate[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID1/leftStick/up,/DualShock4GamepadHID2/leftStick/up,/DualShock4GamepadHID3/leftStick/up,/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID1/rightStick/up,/DualShock4GamepadHID2/rightStick/up,/DualShock4GamepadHID3/rightStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID1/leftStick/down,/DualShock4GamepadHID2/leftStick/down,/DualShock4GamepadHID3/leftStick/down,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID1/rightStick/down,/DualShock4GamepadHID2/rightStick/down,/DualShock4GamepadHID3/rightStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID1/leftStick/left,/DualShock4GamepadHID2/leftStick/left,/DualShock4GamepadHID3/leftStick/left,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID1/rightStick/left,/DualShock4GamepadHID2/rightStick/left,/DualShock4GamepadHID3/rightStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID1/leftStick/right,/DualShock4GamepadHID2/leftStick/right,/DualShock4GamepadHID3/leftStick/right,/DualShock4GamepadHID/rightStick/right,/DualShock4GamepadHID1/rightStick/right,/DualShock4GamepadHID2/rightStick/right,/DualShock4GamepadHID3/rightStick/right,/DualShock4GamepadHID/dpad,/DualShock4GamepadHID1/dpad,/DualShock4GamepadHID2/dpad,/DualShock4GamepadHID3/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 840e3d9f-5d25-4396-8525-6a1c1960f72c
+    m_ActionName: UI/Submit[/Keyboard/enter,/DualShock4GamepadHID/buttonSouth,/DualShock4GamepadHID1/buttonSouth,/DualShock4GamepadHID2/buttonSouth,/DualShock4GamepadHID3/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 01b27536-18da-4d18-918d-2aba2df85495
+    m_ActionName: UI/Cancel[/Keyboard/escape,/DualShock4GamepadHID/buttonEast,/DualShock4GamepadHID1/buttonEast,/DualShock4GamepadHID2/buttonEast,/DualShock4GamepadHID3/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 02a6598b-2d77-4329-b814-03b9ac5fa6ee
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position,/Touchscreen/touch0/position,/Touchscreen/touch1/position,/Touchscreen/touch2/position,/Touchscreen/touch3/position,/Touchscreen/touch4/position,/Touchscreen/touch5/position,/Touchscreen/touch6/position,/Touchscreen/touch7/position,/Touchscreen/touch8/position,/Touchscreen/touch9/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43c130cc-328e-44e6-8232-3f741898265f
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip,/Touchscreen/touch0/press,/Touchscreen/touch1/press,/Touchscreen/touch2/press,/Touchscreen/touch3/press,/Touchscreen/touch4/press,/Touchscreen/touch5/press,/Touchscreen/touch6/press,/Touchscreen/touch7/press,/Touchscreen/touch8/press,/Touchscreen/touch9/press]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1f67b87-818e-464f-b341-aa1cbc8d22cd
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 155b9abc-9bab-4397-9eba-22a8b72f2747
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a17acd1c-c576-44aa-b812-a080e9e4515f
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e2dcaf36-b7a5-46cc-9f72-ce519d2a56cd
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 63cec636-4929-49cb-a47d-2039b2d335ed
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2496670141502323649}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: onAds
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0c47b940-f179-4161-82fe-9883abed5241
+    m_ActionName: Player/Ads[/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID1/leftShoulder,/DualShock4GamepadHID2/leftShoulder,/DualShock4GamepadHID3/leftShoulder,/DualShock4GamepadHID4/leftShoulder,/Mouse/rightButton]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 2496670141791624000}
 --- !u!114 &2496670141502323649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,6 +1038,7 @@ MonoBehaviour:
   maxThrowForce: 40
   throwCooldown: 2.5
   upwardsThrowForce: 5
+  firePoint: {fileID: 2496670141589717425}
   iceWallCD: 14
   currentIceWallCD: 0
   wallCastKeybind: 9
@@ -915,38 +1054,14 @@ MonoBehaviour:
   currentBoomBotCD: 0
   boomBotKeybind: 0
   spawnRange: 0
+  blastPackPrefab: {fileID: 0}
+  blastPackThrowForce: 30
+  blastPackCD: 6
+  currentBlastPackCD: 0
+  torque: 1
+  blastPackKeybind: 0
   debugTransform: {fileID: 6382579273426239503}
-  firePoint: {fileID: 2496670141589717425}
---- !u!114 &5753516391273070413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2496670141502323655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ce5302c743ccd854c9c1801a82e8bbe0, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 2496670141791624000}
+  throwingMode: 0
 --- !u!1 &2496670141589717426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,7 +1278,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2496670141791624002}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &2496670141791624014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,10 +1325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7d73a13c49d6f4c985ed0e03e2590f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 2
-  sensY: 2
+  sensX: 0.5
+  sensY: 0.5
   follow: {fileID: 2496670141502323654}
   Target: {fileID: 2496670141806145962}
+  mousePos: {x: 0, y: 0}
   aimCamera: {fileID: 2496670142096597072}
   lvlManager: {fileID: 0}
 --- !u!1 &2496670141806145963
@@ -1599,7 +1715,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.6747851, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1778,7 +1894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2496670143237591937
 Transform:
   m_ObjectHideFlags: 0

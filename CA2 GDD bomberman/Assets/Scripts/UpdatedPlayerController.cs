@@ -19,6 +19,7 @@ public class UpdatedPlayerController : MonoBehaviour
     public float upwardsThrowForce = 2f;
     float currentThrowCooldown;
     bool onCooldown = false;
+    public Transform firePoint;
 
     [Header("IceWall")]
     private bool isUsingWall = false;
@@ -49,9 +50,8 @@ public class UpdatedPlayerController : MonoBehaviour
 
 
     [SerializeField] private Transform debugTransform;
-
-    public Transform firePoint;
-
+    public bool throwingMode;
+    
     PlayerController pc;
     LevelManager lvlManager;
     Animator anim;
@@ -77,7 +77,7 @@ public class UpdatedPlayerController : MonoBehaviour
             if (lvlManager.gameOver) return;
         }
 
-
+        
         Vector3 viewportCenter = new Vector3(0.5f, 0.5f, cam.nearClipPlane);
         Ray ray = cam.ViewportPointToRay(viewportCenter);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, tpsAimCam.AimCollisionFilter))
@@ -91,6 +91,7 @@ public class UpdatedPlayerController : MonoBehaviour
         {
             if (!onCooldown)
             {
+
                 if (throwForce >= maxThrowForce) return;
                 anim.SetBool("IsChargingBomb", true);
             }
