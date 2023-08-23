@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public enum players { P1 , P2}
     public players currentPlayer;
 
-    
+    private Vector2 movementInput = Vector2.zero;
 
 
 
@@ -54,15 +55,55 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        Debug.Log("Jumped");
+        if (context.performed && isGrounded)
+        {
+            
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }          
+    }
+
+    public void onAds(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            cameraControlRef.AdsMode(true);
+        }
+        if (context.canceled)
+        {
+            cameraControlRef.AdsMode(false);
+        }
+    }
+
+    public void OnBombing(InputAction.CallbackContext context)
+    {
+        if (context.performed) ;
+    }
+
+    public void Rotate(InputAction.CallbackContext context)
+    {
+        cameraControlRef.GetComponent<CameraControl>().mousePos = context.ReadValue<Vector2>();
+    }
+
+
     // Update is called once per frame
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundcheckPos.position, radius, whatIsGround);
 
         anim.SetBool("JumpTrigger", !isGrounded);
-    
 
-        Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal" + currentPlayer.ToString()), 0, Input.GetAxisRaw("Vertical" + currentPlayer.ToString()));
+
+        //Vector3 dir = new Vector3(Input.GetAxisRaw("Horizontal" + currentPlayer.ToString()), 0, Input.GetAxisRaw("Vertical" + currentPlayer.ToString()));
+        Vector3 dir = new Vector3(movementInput.x, 0, movementInput.y);
 
         anim.SetFloat("MoveX", dir.x);
         anim.SetFloat("MoveY", dir.z);
@@ -79,25 +120,13 @@ public class PlayerController : MonoBehaviour
             cc.Move(displacement * moveSpeed * Time.deltaTime);
         }
 
-        if (Input.GetMouseButton(1))
-        {
-            cameraControlRef.AdsMode(true);
-        }
-        else
-        {
-            cameraControlRef.AdsMode(false);
-        }
 
         if (isGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = -1f;
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            Debug.Log("Has pressed Jumped");
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
+        
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         cc.Move(playerVelocity * Time.deltaTime);
