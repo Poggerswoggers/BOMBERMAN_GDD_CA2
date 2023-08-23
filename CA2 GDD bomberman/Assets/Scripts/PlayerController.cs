@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float gravityValue = -9.81f;
     [SerializeField] private Vector3 playerVelocity;
 
+    
+
     [Header("GroundCheck")]
     [SerializeField] private Transform groundcheckPos;
     [SerializeField] private float radius;

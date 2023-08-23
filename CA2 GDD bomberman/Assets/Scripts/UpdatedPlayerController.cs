@@ -10,6 +10,8 @@ public class UpdatedPlayerController : MonoBehaviour
     
     public Cinemachine3rdPersonAim tpsAimCam;
 
+    public float teleportCD = 0f;
+
     [Header("Grenade")]
     public GameObject bombPrefab;
     public float throwForce = 10f;
@@ -77,6 +79,12 @@ public class UpdatedPlayerController : MonoBehaviour
             if (lvlManager.gameOver) return;
         }
 
+
+        //teleport CD
+        if(teleportCD >= 0)
+        {
+            teleportCD -= Time.deltaTime;
+        }
 
         Vector3 viewportCenter = new Vector3(0.5f, 0.5f, cam.nearClipPlane);
         Ray ray = cam.ViewportPointToRay(viewportCenter);
