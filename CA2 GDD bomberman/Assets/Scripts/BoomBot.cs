@@ -76,19 +76,31 @@ public class BoomBot : MonoBehaviour
     }
         
    
+  //  public void GetOtherPlayer(string playerNumber)
+  //  {
+  //      Debug.Log(playerNumber);
+  //      PlayerController[] players = FindObjectsOfType<PlayerController>();
+  //
+    //    foreach (PlayerController player in players)
+      //  {
+        //    if(player.currentPlayer.ToString() == playerNumber)
+          //  {
+          //      targetPlayer = player.gameObject;
+           // }
+       // }
+        //Debug.Log(targetPlayer);
+
+
+    //}
+
     public void GetOtherPlayer(string playerNumber)
     {
-        Debug.Log(playerNumber);
-        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        //GameObject targetTag;
+      
 
-        foreach (PlayerController player in players)
-        {
-            if(player.currentPlayer.ToString() == playerNumber)
-            {
-                targetPlayer = player.gameObject;
-            }
-        }
-        Debug.Log(targetPlayer);
+        Debug.Log(playerNumber);
+        //FindObjectOfType<PlayerController>().tag = playerNumber;
+        targetPlayer = GameObject.FindGameObjectWithTag(playerNumber);
 
 
     }

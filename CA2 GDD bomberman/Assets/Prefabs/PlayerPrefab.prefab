@@ -1137,6 +1137,13 @@ MonoBehaviour:
   anim: {fileID: 8344996308691046942}
   cameraControlRef: {fileID: 2496670141791624013}
   currentPlayer: 0
+  cooldownui: {fileID: 0}
+  blastPackUI: {fileID: 0}
+  boomBotUI: {fileID: 0}
+  iceWallUI: {fileID: 0}
+  blastPackText: {fileID: 0}
+  boomBotText: {fileID: 0}
+  iceWallText: {fileID: 0}
 --- !u!143 &2496670141502323663
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1953,7 +1960,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6747851, y: 1}
+    m_SensorSize: {x: 2.1420233, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

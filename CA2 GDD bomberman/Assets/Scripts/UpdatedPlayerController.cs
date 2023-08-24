@@ -78,6 +78,8 @@ public class UpdatedPlayerController : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
+        if (lvlManager.gameBegin == false) return;
+
         Debug.Log("tewwst");
         if (context.started)
         {
@@ -121,6 +123,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
     public void preIceWall(InputAction.CallbackContext context)
     {
+        if (lvlManager.gameBegin == false) return;
         if (context.started)
         {
             isUsingWall = true;
@@ -135,6 +138,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
     public void OnBoomBot(InputAction.CallbackContext context)
     {
+        if (lvlManager.gameBegin == false) return;
         if (context.started && currentBoomBotCD <= 0)
         {
             CastingBoomBot();
@@ -143,6 +147,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
     public void OnFire1(InputAction.CallbackContext context)
     {
+        if (lvlManager.gameBegin == false) return;
         if (context.started && currentBlastPackCD <= 0)
         {
             ThrowBlastPack();
@@ -154,6 +159,7 @@ public class UpdatedPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
         if (lvlManager != null)
         {
@@ -261,18 +267,22 @@ public class UpdatedPlayerController : MonoBehaviour
 
     void ThrowBlastPack()
     {
-        GameObject blastPack = Instantiate(blastPackPrefab, firePoint.position, transform.rotation);
-        Rigidbody rb = blastPack.GetComponent<Rigidbody>();
+        
 
-        Vector3 aimDirection = (debugTransform.position - firePoint.position).normalized;
-        Vector3 forceToAdd = aimDirection * blastPackThrowForce + transform.up * upwardsThrowForce;
+        if(!isUsingWall)
+        {
+            GameObject blastPack = Instantiate(blastPackPrefab, firePoint.position, transform.rotation);
+            Rigidbody rb = blastPack.GetComponent<Rigidbody>();
 
-        //rb.AddTorque(rb.transform.up * torque);
-        rb.AddTorque(0, 1 * torque, 0  ,ForceMode.Force);
-        rb.AddForce(forceToAdd, ForceMode.VelocityChange);
+            Vector3 aimDirection = (debugTransform.position - firePoint.position).normalized;
+            Vector3 forceToAdd = aimDirection * blastPackThrowForce + transform.up * upwardsThrowForce;
 
-        Debug.Log(aimDirection);
+            //rb.AddTorque(rb.transform.up * torque);
+            rb.AddTorque(0, 1 * torque, 0, ForceMode.Force);
+            rb.AddForce(forceToAdd, ForceMode.VelocityChange);
 
+            Debug.Log(aimDirection);
+        }
 
 
 
@@ -325,11 +335,11 @@ public class UpdatedPlayerController : MonoBehaviour
         Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
         if (gameObject.CompareTag("Player1"))
         {
-            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("P2");
+            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player2");
         }
         else if (gameObject.CompareTag("Player2"))
         {
-            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("P1");
+            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player1");
         }
 
         currentBoomBotCD = boomBotCD;
