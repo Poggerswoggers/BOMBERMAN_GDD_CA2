@@ -157,9 +157,11 @@ public class LevelManager : MonoBehaviour
     {
         gameOver = true;
         gameOverScreen.gameObject.SetActive(true);
-       
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
-        if(player1.playerCurrentHealth > player2.playerCurrentHealth)
+
+        if (player1.playerCurrentHealth > player2.playerCurrentHealth)
         {
             Player1Wins();
         }

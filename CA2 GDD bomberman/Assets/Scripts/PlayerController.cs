@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         for(int i=0; i < cooldownui.transform.childCount; i++)
         {
-            Debug.Log(cooldownui.transform.GetChild(i));
+            
         }
     }
 
