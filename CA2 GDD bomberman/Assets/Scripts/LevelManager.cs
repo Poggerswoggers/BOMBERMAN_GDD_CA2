@@ -107,7 +107,7 @@ public class LevelManager : MonoBehaviour
             StartGame();
         }
 
-           
+        if (!gameBegin) return;
 
         if (player1.playerCurrentHealth <= 0)
         {
