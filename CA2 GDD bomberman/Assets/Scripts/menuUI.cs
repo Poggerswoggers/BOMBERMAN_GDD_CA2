@@ -21,4 +21,9 @@ public class menuUI : MonoBehaviour
     }
 
 
+    public void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }

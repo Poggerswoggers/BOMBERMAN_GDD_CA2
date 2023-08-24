@@ -80,7 +80,6 @@ public class UpdatedPlayerController : MonoBehaviour
     {
         if (lvlManager.gameBegin == false) return;
 
-        Debug.Log("tewwst");
         if (context.started)
         {
             if (isUsingWall)
