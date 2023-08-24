@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,20 +28,11 @@ public class PlayerController : MonoBehaviour
     public CameraControl cameraControlRef;
     LevelManager lvlManager;
 
-    UpdatedPlayerController abilitiesPC;
-
     public enum players { P1 , P2}
     public players currentPlayer;
 
     public GameObject cooldownui;
-    public GameObject blastPackUI;
-    public GameObject boomBotUI;
-    public GameObject iceWallUI;
 
-
-    public TextMeshProUGUI blastPackText;
-    public TextMeshProUGUI boomBotText;
-    public TextMeshProUGUI iceWallText;
 
 
     private Vector2 movementInput = Vector2.zero;
@@ -60,40 +50,33 @@ public class PlayerController : MonoBehaviour
 
         lvlManager = FindObjectOfType<LevelManager>();
 
-        abilitiesPC = GetComponent<UpdatedPlayerController>();
-
         playerCurrentHealth = playerMaxHealth;
 
         if(currentPlayer == players.P1)
         {
             healthBar = lvlManager.player1Hp;
             cooldownui = lvlManager.player1UI;
-            gameObject.tag = "Player1";
         }
         else
         {
             healthBar = lvlManager.player2Hp;
             cooldownui = lvlManager.player2UI;
-            gameObject.tag = "Player2";
         }
 
 
         healthBar.SetMaxHealth(playerMaxHealth);
-        ConnectCds();
+        connectCds();
     }
 
     
     public void OnMove(InputAction.CallbackContext context)
     {
-
-        if (lvlManager.gameBegin == false) return;
         movementInput = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         Debug.Log("Jumped");
-        if (lvlManager.gameBegin == false) return;
         if (context.performed && isGrounded)
         {
             
@@ -105,7 +88,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            
             cameraControlRef.AdsMode(true);
         }
         if (context.canceled)
@@ -119,28 +101,17 @@ public class PlayerController : MonoBehaviour
         cameraControlRef.GetComponent<CameraControl>().mousePos = context.ReadValue<Vector2>();
     }
 
-    public void ConnectCds()
+    public void connectCds()
     {
-        Debug.Log("connect Cooddadsadasd");
-
-        //blastPackUI = cooldownui.transform.GetChild(0).GetComponent<TextMeshPro>();
-
-        blastPackUI = cooldownui.transform.Find("BlastPackCD").gameObject;
-        blastPackText = blastPackUI.GetComponent<TextMeshProUGUI>();
-
-        boomBotUI = cooldownui.transform.Find("BoomBotCD").gameObject;
-        boomBotText = boomBotUI.GetComponent<TextMeshProUGUI>();
-
-        iceWallUI = cooldownui.transform.Find("IceWallCD").gameObject;
-        iceWallText = iceWallUI.GetComponent<TextMeshProUGUI>();    
-
-
+        for(int i=0; i < cooldownui.transform.childCount; i++)
+        {
+            
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         isGrounded = Physics.CheckSphere(groundcheckPos.position, radius, whatIsGround);
 
         anim.SetBool("JumpTrigger", !isGrounded);
@@ -174,15 +145,7 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         cc.Move(playerVelocity * Time.deltaTime);
-
-
-        //Set cooldown UIs
-        blastPackText.text = abilitiesPC.currentBlastPackCD.ToString("0");
-        boomBotText.text = abilitiesPC.currentBoomBotCD.ToString("0");
-        iceWallText.text = abilitiesPC.currentIceWallCD.ToString("0");
-
-
-
+        
 
     }       
 
