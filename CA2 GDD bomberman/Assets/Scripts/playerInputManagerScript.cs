@@ -15,10 +15,13 @@ public class playerInputManagerScript : MonoBehaviour
     public LayerMask player1Mask;
     public LayerMask player2Mask;
 
+    CharacterController cc;
+
     // Start is called before the first frame update
     private void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
+        
     }
 
 
@@ -26,6 +29,7 @@ public class playerInputManagerScript : MonoBehaviour
     {
         Debug.Log("Ran");
         // Get the GameObject representing the player
+
         Transform playerObject = playerInput.gameObject.transform.parent;
         Debug.Log(playerObject);
 
@@ -58,8 +62,10 @@ public class playerInputManagerScript : MonoBehaviour
     
         stringInt++;
 
+        cc =   playerObject.gameObject.GetComponentInChildren<CharacterController>();
+        cc.enabled = false;
         playerObject.position = warmupSpawn.position + new Vector3(0,2,0);
-
+        cc.enabled = true;
 
     }
 

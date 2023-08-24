@@ -184,7 +184,7 @@ public class UpdatedPlayerController : MonoBehaviour
 
         if (isCharging && !isUsingWall)
         {
-            Debug.Log("tewwst");
+            //Debug.Log("tewwst");
             if (!onCooldown)
             {
                 if (throwForce >= maxThrowForce) return;
@@ -332,14 +332,15 @@ public class UpdatedPlayerController : MonoBehaviour
     void CastingBoomBot()
     {
         Vector3 spawnPos = gameObject.transform.position + transform.forward  * spawnRange;
-        Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
+
+        GameObject spawnedBB = Instantiate(boomBotPrefab, spawnPos, gameObject.transform.rotation);
         if (gameObject.CompareTag("Player1"))
         {
-            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player2");
+            spawnedBB.GetComponent<BoomBot>().GetOtherPlayer("Player2");
         }
         else if (gameObject.CompareTag("Player2"))
         {
-            boomBotPrefab.GetComponent<BoomBot>().GetOtherPlayer("Player1");
+            spawnedBB.GetComponent<BoomBot>().GetOtherPlayer("Player1");
         }
 
         currentBoomBotCD = boomBotCD;

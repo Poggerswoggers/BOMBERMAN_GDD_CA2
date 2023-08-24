@@ -20,10 +20,5 @@ public class menuUI : MonoBehaviour
         Application.Quit();
     }
 
-    private void Update()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
 
 }

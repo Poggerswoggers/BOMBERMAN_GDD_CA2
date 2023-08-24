@@ -12,9 +12,9 @@ public class BlastPack : MonoBehaviour
     public float knockbackForce = 1000f;
     public float upwardsModifier = 3f;
 
-    [Header("AduioClips")]
-    public AudioClip bombExplode;
-    public AudioClip ticking;
+    //[Header("AduioClips")]
+    //public AudioClip bombExplode;
+    //public AudioClip ticking;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class BlastPack : MonoBehaviour
     void Explode()
     {
         Instantiate(explosionEffect, transform.position, transform.rotation);
-        AudioSource.PlayClipAtPoint(bombExplode, transform.position);
+        //AudioSource.PlayClipAtPoint(bombExplode, transform.position);
 
         //obtain all objects hit by grenade explosion
         Collider[] hit = Physics.OverlapSphere(transform.position, blastRadius);

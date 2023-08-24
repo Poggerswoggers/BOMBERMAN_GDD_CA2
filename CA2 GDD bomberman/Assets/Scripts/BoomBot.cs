@@ -100,9 +100,10 @@ public class BoomBot : MonoBehaviour
 
         Debug.Log(playerNumber);
         //FindObjectOfType<PlayerController>().tag = playerNumber;
-        targetPlayer = GameObject.FindGameObjectWithTag(playerNumber);
+       // targetPlayer = GameObject.FindGameObjectWithTag(playerNumber);
+        targetPlayer = GameObject.FindWithTag(playerNumber);
 
-
+        Debug.Log(targetPlayer);
     }
 
     void Explode()
