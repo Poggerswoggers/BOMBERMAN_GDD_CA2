@@ -22,9 +22,14 @@ public class LevelManager : MonoBehaviour
     public GameObject player1UI;
     public GameObject player2UI;
 
-    public float warmUpTime = 15;
+    [Header("DmgPixel")]
+    public GameObject dmgEffectP1;
+    public GameObject dmgEffectP2;
+
 
     [Header("Rounds")]
+    public float warmUpTime = 15;
+
     public float maxRoundTime = 150;
     public float currentRoundTime;
     public Text countdownTxt;
@@ -40,6 +45,8 @@ public class LevelManager : MonoBehaviour
     public GameObject gameOverScreen;
     public Text winnerTxt;
 
+    public AudioClip crowdCheer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,26 +58,13 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
 
-        
-
-
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            SceneManager.LoadScene(3);
-        }
-
+       
 
 
         if (!warmUpBeign && startCheck== false)
         {
             PlayerController[] players = FindObjectsOfType<PlayerController>();
-            warmUpBeign = (players.Length != 2) ? false : true;
+            warmUpBeign = (players.Length != 1) ? false : true;
             
 
             foreach(PlayerController player in players)
@@ -100,7 +94,7 @@ public class LevelManager : MonoBehaviour
         if (!gameBegin)
         {
             player1.playerCurrentHealth = player1.playerMaxHealth;
-            player1.playerCurrentHealth = player1.playerMaxHealth;
+            player2.playerCurrentHealth = player2.playerMaxHealth;
         }
         else
         {
@@ -127,10 +121,10 @@ public class LevelManager : MonoBehaviour
 	IEnumerator BeginBrawl()
     {
         intermission = true;
-
+        GetComponent<AudioSource>().PlayOneShot(crowdCheer);
         string textBrawl = "Prepare to brawl";
         countdownTxt.text = textBrawl;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         int countdownFrom = 3;
         for(int i = 0; i<4; i++)
@@ -194,6 +188,6 @@ public class LevelManager : MonoBehaviour
 
     public void moveScene(int sceneId)
     {
-        SceneManager.LoadScene(sceneId);
+        //SceneManager.LoadScene(sceneId);
     }
 }

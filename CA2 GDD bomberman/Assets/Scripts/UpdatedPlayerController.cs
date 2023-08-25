@@ -36,6 +36,8 @@ public class UpdatedPlayerController : MonoBehaviour
     public GameObject iceWallPreview, iceWallObject;
     public LayerMask layermask;
     [SerializeField] private bool direction, casting;
+
+    public bool changeDir;
    
 
     [Header("BoomBot")]
@@ -154,6 +156,14 @@ public class UpdatedPlayerController : MonoBehaviour
         }
     }
 
+    public void OnChangeDir(InputAction.CallbackContext context)
+    {
+        if (context.started && !changeDir)
+        {
+            changeDir = true;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -260,7 +270,6 @@ public class UpdatedPlayerController : MonoBehaviour
         Vector3 forceToAdd = aimDirection * throwForce + transform.up * upwardsThrowForce;
         rb.AddForce(forceToAdd, ForceMode.VelocityChange);
 
-        Debug.Log(aimDirection);
 
     }
 
@@ -320,10 +329,10 @@ public class UpdatedPlayerController : MonoBehaviour
         else { iceWallPreview.SetActive(false); }
 
 
-        if (Input.GetKeyDown(directionKeybind))
+        if (changeDir)
         {
             direction = !direction;
-            
+            changeDir = false;
         }
 
     }

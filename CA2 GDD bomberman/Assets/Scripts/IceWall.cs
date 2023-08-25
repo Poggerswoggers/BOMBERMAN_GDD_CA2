@@ -55,7 +55,7 @@ public class IceWall : MonoBehaviour
 
         if (health <= 0)
         {
-            audiosource.PlayOneShot(breakSound);
+            AudioSource.PlayClipAtPoint(breakSound, transform.position);
 
             Component[] fractures = GetComponentsInChildren(typeof(Rigidbody), true); //get all the fragment game objects
             foreach (Rigidbody child in fractures)

@@ -169,8 +169,8 @@ MonoBehaviour:
   destroyDelay: 5
   destroyPushForce: 5
   destroyRotationForce: 50
-  breakSound: {fileID: 0}
-  buildSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 40dec005db653da4ba272fe65b969f77, type: 3}
+  buildSound: {fileID: 8300000, guid: be06e048afa6d7149bda3d8874d13cd1, type: 3}
 --- !u!1 &4327022831593135289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4805164142077784000, guid: 4390fd4146a49c148a1c59f1aa26ab16, type: 3}
@@ -445,8 +445,8 @@ MonoBehaviour:
   destroyDelay: 5
   destroyPushForce: 5
   destroyRotationForce: 50
-  breakSound: {fileID: 0}
-  buildSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 40dec005db653da4ba272fe65b969f77, type: 3}
+  buildSound: {fileID: 8300000, guid: be06e048afa6d7149bda3d8874d13cd1, type: 3}
 --- !u!1 &4130538128829053305 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4805164142077784000, guid: 4390fd4146a49c148a1c59f1aa26ab16, type: 3}
@@ -725,7 +725,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 150
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -763,7 +763,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1123,8 +1123,8 @@ MonoBehaviour:
   destroyDelay: 5
   destroyPushForce: 5
   destroyRotationForce: 50
-  breakSound: {fileID: 0}
-  buildSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 40dec005db653da4ba272fe65b969f77, type: 3}
+  buildSound: {fileID: 8300000, guid: be06e048afa6d7149bda3d8874d13cd1, type: 3}
 --- !u!1 &6154731785096177649 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8740776383353401128, guid: 4390fd4146a49c148a1c59f1aa26ab16, type: 3}
@@ -1399,8 +1399,8 @@ MonoBehaviour:
   destroyDelay: 5
   destroyPushForce: 5
   destroyRotationForce: 50
-  breakSound: {fileID: 0}
-  buildSound: {fileID: 0}
+  breakSound: {fileID: 8300000, guid: 40dec005db653da4ba272fe65b969f77, type: 3}
+  buildSound: {fileID: 8300000, guid: be06e048afa6d7149bda3d8874d13cd1, type: 3}
 --- !u!1 &4927060517754251529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8740776383353401128, guid: 4390fd4146a49c148a1c59f1aa26ab16, type: 3}

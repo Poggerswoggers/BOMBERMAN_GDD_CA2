@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public enum players { P1 , P2}
     public players currentPlayer;
 
+    [Header("CooldownUI")]
     public GameObject cooldownui;
     public GameObject blastPackUI;
     public GameObject boomBotUI;
@@ -45,13 +46,30 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movementInput = Vector2.zero;
 
+    [Header("Hurt Effect")]
+    [SerializeField] Material hurtColor1, hurtColor2;
+
+    [SerializeField] private SkinnedMeshRenderer bomberManRenderer;
+    private Material defaultMaterial;
+
+    private GameObject hurtPixel;
+    [SerializeField] private RenderTexture HurtPixelRender;
 
 
+    [Header("Audio")]
+    AudioSource aS;
+    public AudioClip hurtSound;
+    public AudioClip macerenaSound;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        bomberManRenderer = bomberManRenderer.GetComponent<SkinnedMeshRenderer>();
+        defaultMaterial = bomberManRenderer.material;
+
+        aS = GetComponent<AudioSource>();
+
         cc = GetComponent<CharacterController>();
 
         anim = GetComponentInChildren<Animator>();
@@ -62,16 +80,19 @@ public class PlayerController : MonoBehaviour
 
         abilitiesPC = GetComponent<UpdatedPlayerController>();
 
+
         if (currentPlayer == players.P1)
         {
             healthBar = lvlManager.player1Hp;
             cooldownui = lvlManager.player1UI;
+            hurtPixel = lvlManager.dmgEffectP1;
             gameObject.tag = "Player1";
         }
         else
         {
             healthBar = lvlManager.player2Hp;
             cooldownui = lvlManager.player2UI;
+            hurtPixel = lvlManager.dmgEffectP2;
             gameObject.tag = "Player2";
         }
 
@@ -85,6 +106,8 @@ public class PlayerController : MonoBehaviour
     {
         if (lvlManager.gameBegin == false) return;
         movementInput = context.ReadValue<Vector2>();
+        anim.SetBool("Dance", false);
+        aS.Stop();
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -115,6 +138,16 @@ public class PlayerController : MonoBehaviour
         cameraControlRef.GetComponent<CameraControl>().mousePos = context.ReadValue<Vector2>();
     }
 
+    public void Emote(InputAction.CallbackContext context)
+    {
+        if (context.started && movementInput == Vector2.zero)
+        {
+            anim.SetBool("Dance", true);
+            aS.PlayOneShot(macerenaSound);
+        }
+    }
+
+
     public void connectCds()
     {
         blastPackUI = cooldownui.transform.Find("BlastPackCD").gameObject;
@@ -125,8 +158,6 @@ public class PlayerController : MonoBehaviour
 
         iceWallUI = cooldownui.transform.Find("IceWallCD").gameObject;
         iceWallText = iceWallUI.GetComponent<TextMeshProUGUI>();
-
-
     }
 
     // Update is called once per frame
@@ -152,7 +183,7 @@ public class PlayerController : MonoBehaviour
         if (dir.magnitude >= 0.1f)
         {
             Vector3 displacement = transform.TransformDirection(dir.normalized);
-            cc.Move(displacement * moveSpeed * Time.deltaTime);
+            cc.Move(displacement * moveSpeed * Time.deltaTime);            
         }
 
 
@@ -178,10 +209,39 @@ public class PlayerController : MonoBehaviour
         {
             if (lvlManager.gameOver) return;
             playerCurrentHealth -= damage;
+            StartCoroutine(HurtEffect());
+
             if(playerCurrentHealth > 100) playerCurrentHealth = 100;
 
 
             healthBar.SetHealth(playerCurrentHealth);
         }       
+    }
+
+
+    IEnumerator HurtEffect()
+    {
+        aS.PlayOneShot(hurtSound);
+        hurtPixel.SetActive(true);
+        //Debug.Log(cameraControlRef.gameObject);
+        cameraControlRef.gameObject.GetComponent<Camera>().targetTexture = HurtPixelRender;
+
+        float timer = 0.1f;
+
+        for(int i = 0; i<3; i++)
+        {
+            bomberManRenderer.material = hurtColor1;
+            yield return new WaitForSeconds(timer);
+            bomberManRenderer.material = hurtColor2;
+            yield return new WaitForSeconds(timer);
+
+            Debug.Log(timer);
+            timer += 0.1f;
+
+        }
+
+        bomberManRenderer.material = defaultMaterial;
+        hurtPixel.SetActive(false);
+        cameraControlRef.gameObject.GetComponent<Camera>().targetTexture = null;
     }
 }
