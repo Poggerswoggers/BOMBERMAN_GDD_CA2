@@ -8,7 +8,8 @@ public class playerInputManagerScript : MonoBehaviour
 
     private PlayerInputManager playerInputManager;
 
-    public Transform warmupSpawn;
+    public Transform spawnPoint1;
+    public Transform spawnPoint2;
 
     public List<string> camLayer;
     public int stringInt;
@@ -48,24 +49,24 @@ public class playerInputManagerScript : MonoBehaviour
 
         Camera playerCam = playerObject.GetComponentInChildren<Camera>();
 
+        cc = playerObject.gameObject.GetComponentInChildren<CharacterController>();
+        cc.enabled = false;
+
         if (stringInt == 0)
         {
-            playerObject.GetComponentInChildren<PlayerController>().currentPlayer = PlayerController.players.P1;
+            playerObject.GetComponentInChildren<PlayerController>().currentPlayer = PlayerController.players.P1;          
             playerCam.cullingMask = ~player2Mask;
-            
+            playerObject.position = spawnPoint1.position + new Vector3(0, 2, 0);
+
         }
         else
         {
             playerObject.GetComponentInChildren<PlayerController>().currentPlayer = PlayerController.players.P2;
             playerCam.cullingMask = ~player1Mask;
+            playerObject.position = spawnPoint2.position + new Vector3(0, 2, 0);
         }
-    
-        stringInt++;
-
-        cc =   playerObject.gameObject.GetComponentInChildren<CharacterController>();
-        cc.enabled = false;
-        playerObject.position = warmupSpawn.position + new Vector3(0,2,0);
         cc.enabled = true;
+        stringInt++;
 
     }
 

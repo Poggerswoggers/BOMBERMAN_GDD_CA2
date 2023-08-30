@@ -375,7 +375,7 @@
                 {
                     "name": "",
                     "id": "a2a5fcd2-0467-4703-b16c-2cd5d0964843",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -408,7 +408,7 @@
                 {
                     "name": "",
                     "id": "bfa97cd8-672b-44e5-8d6f-540172ccca99",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -423,6 +423,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "ChangeDir",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e8b4e94-a31d-4eae-a419-ce21da256360",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "ChangeDir",
                     "isComposite": false,
                     "isPartOfComposite": false

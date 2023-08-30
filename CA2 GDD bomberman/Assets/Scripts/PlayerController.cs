@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     AudioSource aS;
     public AudioClip hurtSound;
     public AudioClip macerenaSound;
+    private bool isMusic;
 
 
     // Start is called before the first frame update
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
         lvlManager = FindObjectOfType<LevelManager>();
 
+
         playerCurrentHealth = playerMaxHealth;
 
         abilitiesPC = GetComponent<UpdatedPlayerController>();
@@ -86,6 +88,7 @@ public class PlayerController : MonoBehaviour
             healthBar = lvlManager.player1Hp;
             cooldownui = lvlManager.player1UI;
             hurtPixel = lvlManager.dmgEffectP1;
+            HurtPixelRender = lvlManager.HurtPixelRenderP1;
             gameObject.tag = "Player1";
         }
         else
@@ -93,6 +96,7 @@ public class PlayerController : MonoBehaviour
             healthBar = lvlManager.player2Hp;
             cooldownui = lvlManager.player2UI;
             hurtPixel = lvlManager.dmgEffectP2;
+            HurtPixelRender = lvlManager.HurtPixelRenderP2;
             gameObject.tag = "Player2";
         }
 
@@ -106,8 +110,13 @@ public class PlayerController : MonoBehaviour
     {
         if (lvlManager.gameBegin == false) return;
         movementInput = context.ReadValue<Vector2>();
-        anim.SetBool("Dance", false);
-        aS.Stop();
+        anim.SetBool("Dance2", false);
+        if(aS.isPlaying && isMusic)
+        {
+            aS.Stop();
+            isMusic = false;
+        }
+
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -142,8 +151,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && movementInput == Vector2.zero)
         {
-            anim.SetBool("Dance", true);
+            anim.SetBool("Dance2", true);
+            if (aS.isPlaying) return;
             aS.PlayOneShot(macerenaSound);
+            isMusic = true;
         }
     }
 
@@ -163,6 +174,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         isGrounded = Physics.CheckSphere(groundcheckPos.position, radius, whatIsGround);
 
         anim.SetBool("JumpTrigger", !isGrounded);
@@ -209,7 +221,12 @@ public class PlayerController : MonoBehaviour
         {
             if (lvlManager.gameOver) return;
             playerCurrentHealth -= damage;
-            StartCoroutine(HurtEffect());
+
+            if (damage > 0)
+            {
+                StartCoroutine(HurtEffect());
+                //healthBar.gameObject.GetComponent<Animation>().Play();
+            }
 
             if(playerCurrentHealth > 100) playerCurrentHealth = 100;
 

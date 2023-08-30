@@ -26,6 +26,8 @@ public class LevelManager : MonoBehaviour
     public GameObject dmgEffectP1;
     public GameObject dmgEffectP2;
 
+    public RenderTexture HurtPixelRenderP1;
+    public RenderTexture HurtPixelRenderP2;
 
     [Header("Rounds")]
     public float warmUpTime = 15;
@@ -64,7 +66,7 @@ public class LevelManager : MonoBehaviour
         if (!warmUpBeign && startCheck== false)
         {
             PlayerController[] players = FindObjectsOfType<PlayerController>();
-            warmUpBeign = (players.Length != 1) ? false : true;
+            warmUpBeign = (players.Length != 2) ? false : true;
             
 
             foreach(PlayerController player in players)
@@ -165,8 +167,9 @@ public class LevelManager : MonoBehaviour
         {
             Draw();
         }
-        
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
     }
 
@@ -188,6 +191,6 @@ public class LevelManager : MonoBehaviour
 
     public void moveScene(int sceneId)
     {
-        //SceneManager.LoadScene(sceneId);
+        SceneManager.LoadScene(sceneId);
     }
 }

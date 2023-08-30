@@ -38,6 +38,11 @@ public class BoomBot : MonoBehaviour
 
     void Update()
     {
+        AudioSource movingaudio = GetComponent<AudioSource>();
+        if (!movingaudio.isPlaying)
+        {
+            movingaudio.Play();
+        }
         player = targetPlayer.transform.position;
         agent.destination = player;
 
